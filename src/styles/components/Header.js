@@ -14,7 +14,8 @@ const styles = {
         color: styleConstants.white,
         fontSize: 36,
         position: 'absolute',
-        left: 0
+        left: 0,
+        cursor: 'pointer'
     },
     logoContainer: {
         display: 'flex',

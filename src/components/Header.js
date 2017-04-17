@@ -11,6 +11,13 @@ export default class Header extends React.Component {
         super(props);
     }
 
+    static get propTypes()
+    {
+        return {
+          handleClick: React.PropTypes.func.isRequired
+        };
+    }
+
     render() {
         const backButton = !this.props.home ?
             <BackIcon 

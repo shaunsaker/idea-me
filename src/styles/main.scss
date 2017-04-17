@@ -3,3 +3,26 @@
 p {
     margin: 0
 }
+
+.dropdown-menu {
+    border-radius: 32px;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    background-color: transparent;
+}
+
+@media (max-width: 480px) {
+    .ideas-container {
+        padding: 16px !important;
+    }
+
+    .idea-item {
+        display: block !important;
+
+        & .label-container {
+            padding-top: 16px !important;
+            justify-content: flex-end;
+        }
+    }
+}
