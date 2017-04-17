@@ -1,14 +1,6 @@
 import styleConstants from '../styleConstants';
 
 const styles = {
-    container: {
-        display: 'flex',
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative'
-    },
     button: {
         padding: 16,
         margin: 16,
@@ -19,9 +11,8 @@ const styles = {
         boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
     },
     icon: {
-        fontSize: 48,
         color: styleConstants.white,
-    },
+    }
 };
 
 export default styles;
