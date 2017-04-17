@@ -1,6 +1,9 @@
+import styleConstants from '../styleConstants';
+
 const styles = {
     container: {
-        height: '100vh'
+        height: '100vh',
+        backgroundColor: styleConstants.blue
     },
 };
 
