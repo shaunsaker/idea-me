@@ -11,18 +11,6 @@ const styles = {
         paddingTop: 92,
         paddingBottom: 16,
     },
-    dropdownButton: {
-        width: 200,
-        fontSize: 18,
-        borderRadius: 32,
-        marginBottom: 32,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
-    },
-    dropdownItem: {
-        fontSize: 18,
-        textAlign: 'center',
-        width: 200
-    },
     ideasContainer: {
         flex: 1,
         width: '100%',

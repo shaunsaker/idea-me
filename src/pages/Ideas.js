@@ -7,6 +7,7 @@ import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
+import CategoryDropdownButton from '../components/CategoryDropdownButton';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -47,32 +48,6 @@ export class Ideas extends React.Component {
   }
 
   render() {
-    const dropdownButton =
-      <DropdownButton
-        style={{ ...styles.dropdownButton, ...styleConstants.sourceSansPro }}
-        id='sortDropdown'
-        title={this.state.currentCategory}
-        noCaret={true}
-        onSelect={(event) => { this.selectCategory(event) }}>
-        <MenuItem
-          eventKey={100}
-          style={{ ...styles.dropdownItem, ...styleConstants.sourceSansPro }}>
-          All
-        </MenuItem>
-        {
-          this.props.categories.map((value, index) => {
-            return (
-              <MenuItem
-                eventKey={index}
-                key={'category' + index}
-                style={{ ...styles.dropdownItem, ...styleConstants.sourceSansPro }}>
-                {value}
-              </MenuItem>
-            );
-          })
-        }
-      </DropdownButton>
-
     const ideas =
       <div className="ideas-container" style={styles.ideasContainer}>
         {
@@ -104,7 +79,11 @@ export class Ideas extends React.Component {
         <Header 
           handleClick={this.navigateBack} 
           ideas={true} />
-        {dropdownButton}
+        <CategoryDropdownButton
+          currentCategory={this.state.currentCategory}
+          handleSelect={this.selectCategory}
+          categories={this.props.categories}
+          />
         {ideas}
       </div >
     );
