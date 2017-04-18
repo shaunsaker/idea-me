@@ -3,18 +3,17 @@ import styleConstants from '../styleConstants';
 const styles = {
     headerContainer: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         position: 'absolute',
         top: 0,
+        margin: 'auto',
         marginTop: 16,
-        width: '100%'
+        width: '100%',
     },
     icon: {
         color: styleConstants.white,
         fontSize: 36,
-        position: 'absolute',
-        left: 0,
         cursor: 'pointer'
     },
     logoContainer: {

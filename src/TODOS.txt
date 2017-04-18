@@ -1,0 +1,11 @@
+Add item
+Edit item
+    Delete item
+Add category
+    Delete category
+Lightbulb gif loader
+Firebase
+
+ENHANCEMENTS
+Ideas count display
+Different colour labels

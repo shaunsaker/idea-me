@@ -10,22 +10,27 @@ export default class AddIdeaButton extends React.Component {
     constructor(props) {
         super(props);
     }
-    
-    static get propTypes()
-    {
+
+    static get propTypes() {
         return {
-          size: React.PropTypes.number.isRequired
+            size: React.PropTypes.number.isRequired
         };
     }
 
     render() {
+        const button = this.props.ideas ?
+            <PlusIcon
+                style={{ ...styles.icon, fontSize: this.props.size }} />
+            :
+            <Button
+                style={styles.button} >
+                <PlusIcon
+                    style={{ ...styles.icon, fontSize: this.props.size }} />
+            </Button>
+
         return (
             <Link to='/add'>
-                <Button
-                    style={styles.button} >
-                    <PlusIcon
-                        style={{ ...styles.icon, fontSize: this.props.size }} />
-                </Button>
+                { button }
             </Link>
         );
     }

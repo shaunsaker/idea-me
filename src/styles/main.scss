@@ -5,18 +5,19 @@ p {
 }
 
 .dropdown-menu {
-    border-radius: 32px;
+    border-radius: 24px;
 }
 
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
     background-color: transparent;
+    color: #00bcd4;
+}
+
+.add-idea .logo-container {
+    margin-left: -36px; // TODO: dirty fix
 }
 
 @media (max-width: 480px) {
-    .ideas-container {
-        padding: 16px !important;
-    }
-
     .idea-item {
         display: block !important;
 

@@ -9,7 +9,7 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         paddingTop: 92,
-        paddingBottom: 118
+        paddingBottom: 16,
     },
     dropdownButton: {
         width: 200,
@@ -24,12 +24,9 @@ const styles = {
         width: 200
     },
     ideasContainer: {
-        borderRadius: 32,
-        backgroundColor: styleConstants.white,
-        padding: 32,
+        flex: 1,
         width: '100%',
         overflow: 'auto',
-        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
         maxWidth: 720
     },
     ideaItem: {
@@ -38,12 +35,12 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         marginBottom: 8,
-        borderBottomWidth: 2,
-        borderBottomColor: styleConstants.yellow,
-        borderBottomStyle: 'solid',
-        paddingBottom: 16 ,
-        flexWrap: 'wrap'
-    },  
+        padding: 16,
+        flexWrap: 'wrap',
+        backgroundColor: styleConstants.white,
+        borderRadius: 16,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+    },
     ideaText: {
         fontSize: 18,
         flex: 1

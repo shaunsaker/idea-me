@@ -7,7 +7,6 @@ import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
-import AddIdeaButton from '../components/AddIdeaButton';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -102,12 +101,11 @@ export class Ideas extends React.Component {
 
     return (
       <div style={styles.container}>
-        <Header handleClick={this.navigateBack} />
+        <Header 
+          handleClick={this.navigateBack} 
+          ideas={true} />
         {dropdownButton}
         {ideas}
-        <div style={styles.footer}>
-          <AddIdeaButton size={36} />
-        </div>
       </div >
     );
   }

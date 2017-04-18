@@ -18,7 +18,9 @@ export default class AddIdea extends React.Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div 
+        className='add-idea'
+        style={styles.container}>
         <Header handleClick={this.navigateBack} />
 
       </div >
