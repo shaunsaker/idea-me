@@ -16,7 +16,7 @@ export default class Header extends React.Component {
     static get propTypes()
     {
         return {
-          handleClick: React.PropTypes.func.isRequired
+          handleClick: React.PropTypes.func
         };
     }
 

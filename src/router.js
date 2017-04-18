@@ -5,6 +5,7 @@ import App from "./pages/App";
 import Home from "./pages/Home";
 import Ideas from "./pages/Ideas";
 import AddIdea from "./pages/AddIdea";
+import EditCategories from "./pages/EditCategories";
 import RequireAuth from "./components/RequireAuth";
 
 // build the router
@@ -13,7 +14,8 @@ const router = (
     <Route path="/" component={App}>
       <IndexRoute component={RequireAuth(Home)} />
       <Route path="/ideas" component={RequireAuth(Ideas)} />
-      <Route path="/add" component={RequireAuth(AddIdea)} />
+      <Route path="/add-idea" component={RequireAuth(AddIdea)} />
+      <Route path="/edit-categories" component={RequireAuth(EditCategories)} />
     </Route>
   </Router>
 );

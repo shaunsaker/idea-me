@@ -1,4 +1,5 @@
 import React from "react";
+import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { DropdownButton, MenuItem } from "react-bootstrap";
 import EditIcon from "react-icons/lib/fa/pencil";
@@ -14,6 +15,7 @@ export class Ideas extends React.Component {
     super(props);
 
     this.navigateBack = this.navigateBack.bind(this);
+    this.navigateEditCategories = this.navigateEditCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
 
     this.state = {
@@ -32,18 +34,27 @@ export class Ideas extends React.Component {
     this.props.router.goBack();
   }
 
+  navigateEditCategories() {
+    browserHistory.push('edit-categories');
+  }
+
   selectCategory(eventId) {
 
-    // 100 is reserved for 'All' categories
-    if (eventId !== 100) {
-      this.setState({
-        currentCategory: this.props.categories[eventId]
-      });
+    // 100 is reserved for 'All' categories, 200 is reserved as the edit-categories button
+    if (eventId !== 200) {
+      if (eventId !== 100) {
+        this.setState({
+          currentCategory: this.props.categories[eventId]
+        });
+      }
+      else {
+        this.setState({
+          currentCategory: 'All'
+        });
+      }
     }
     else {
-      this.setState({
-        currentCategory: 'All'
-      });
+      this.navigateEditCategories();
     }
   }
 
@@ -76,14 +87,14 @@ export class Ideas extends React.Component {
 
     return (
       <div style={styles.container}>
-        <Header 
-          handleClick={this.navigateBack} 
+        <Header
+          handleClick={this.navigateBack}
           ideas={true} />
         <CategoryDropdownButton
           currentCategory={this.state.currentCategory}
           handleSelect={this.selectCategory}
           categories={this.props.categories}
-          />
+        />
         {ideas}
       </div >
     );

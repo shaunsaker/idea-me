@@ -29,7 +29,7 @@ export default class AddIdeaButton extends React.Component {
             </Button>
 
         return (
-            <Link to='/add'>
+            <Link to='/add-idea'>
                 { button }
             </Link>
         );
