@@ -25,8 +25,8 @@ export class Ideas extends React.Component {
 
   static get propTypes() {
     return {
-      categories: React.PropTypes.array,
-      ideas: React.PropTypes.array
+      categories: React.PropTypes.array.isRequired,
+      ideas: React.PropTypes.array.isRequired
     };
   }
 
@@ -94,6 +94,7 @@ export class Ideas extends React.Component {
           currentCategory={this.state.currentCategory}
           handleSelect={this.selectCategory}
           categories={this.props.categories}
+          initial='All'
         />
         {ideas}
       </div >

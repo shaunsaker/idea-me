@@ -8,7 +8,7 @@ styleConstants.sourceSansPro = {
 }
 
 styleConstants.blue = '#00bcd4';
-styleConstants.yellow = '#ffff23';
+styleConstants.yellow = '#ffff00';
 styleConstants.white = '#ffffff';
 
 export default styleConstants;

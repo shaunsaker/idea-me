@@ -15,6 +15,7 @@ export default class CategoryDropdownButton extends React.Component {
             currentCategory: React.PropTypes.string.isRequired,
             handleSelect: React.PropTypes.func.isRequired,
             categories: React.PropTypes.array.isRequired,
+            initial: React.PropTypes.string.isRequired,
         };
     }
 
@@ -35,7 +36,7 @@ export default class CategoryDropdownButton extends React.Component {
                 <MenuItem
                     eventKey={100}
                     style={{ ...styles.dropdownItem, ...styleConstants.sourceSansPro }}>
-                    All
+                    {this.props.initial}
                 </MenuItem>
                 {
                     this.props.categories.map((value, index) => {
