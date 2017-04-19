@@ -1,3 +1,5 @@
+// TODO: On Save Idea - Save to db, add newIdea to ideas array
+
 import React from "react";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";

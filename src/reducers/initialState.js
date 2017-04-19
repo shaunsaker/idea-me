@@ -25,6 +25,10 @@ const initialState = {
     newIdea: {
         value: null,
         category: null
+    },
+    editIdea: {
+        value: null,
+        categoryId: null
     }
 }
 

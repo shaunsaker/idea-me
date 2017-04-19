@@ -1,3 +1,5 @@
+// TODO: On Update Idea - Save to db, update editIdea in appropriate location of ideas array
+
 import React from "react";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";
@@ -15,24 +17,30 @@ export class EditIdea extends React.Component {
         super(props);
 
         this.navigateBack = this.navigateBack.bind(this);
+        this.updateEditIdeaValue = this.updateEditIdeaValue.bind(this);
         this.navigateEditCategories = this.navigateEditCategories.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
-
-        this.state = {
-            currentCategory: 'Select a Category'
-        }
     }
 
     static get propTypes() {
         return {
             categories: React.PropTypes.array.isRequired,
-            idea: React.PropTypes.string.isRequired,
-            categoryId: React.PropTypes.number.isRequired
+            initialIdeaValue: React.PropTypes.string.isRequired,
+            initialIdeaCategory: React.PropTypes.number.isRequired,
+            editIdeaValue: React.PropTypes.string,
+            editIdeaCategory: React.PropTypes.number
         };
     }
 
     navigateBack() {
         this.props.router.goBack();
+    }
+
+    updateEditIdeaValue(event) {
+        this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_VALUE',
+            value: event.target.value,
+        });
     }
 
     navigateEditCategories() {
@@ -44,13 +52,9 @@ export class EditIdea extends React.Component {
         // 100 is reserved for blank categories, 200 is reserved as the edit-categories button
         if (eventId !== 200) {
             if (eventId !== 100) {
-                this.setState({
-                    currentCategory: this.props.categories[eventId]
-                });
-            }
-            else {
-                this.setState({
-                    currentCategory: 'Select a Category'
+                this.props.dispatch({
+                    type: 'main.UPDATE_EDIT_IDEA_CATEGORY',
+                    value: eventId
                 });
             }
         }
@@ -73,15 +77,16 @@ export class EditIdea extends React.Component {
                 <Header handleClick={this.navigateBack} />
                 <div style={styles.inputArea}>
                     <Input
-                        value={this.props.idea} />
+                        value={this.props.editIdeaValue ? this.props.editIdeaValue : this.props.initialIdeaValue}
+                        handleChange={this.updateEditIdeaValue} />
                     <CategoryDropdownButton
-                        currentCategory={this.state.currentCategory}
+                        currentCategory={this.props.editIdeaCategory ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
                         categories={this.props.categories}
                         initial='Select a Category' />
                 </div>
                 <FooterButton
-                    text='SAVE IDEA' />
+                    text='UPDATE IDEA' />
             </div >
         );
     }
@@ -90,9 +95,11 @@ export class EditIdea extends React.Component {
 function MapStateToProps(state) {
     return ({
         categories: state.main.categories,
-        idea: state.routing.locationBeforeTransitions.query.idea,
-        categoryId: Number(state.routing.locationBeforeTransitions.query.categoryId)
-  });
+        initialIdeaValue: state.routing.locationBeforeTransitions.query.idea,
+        initialIdeaCategory: Number(state.routing.locationBeforeTransitions.query.categoryId),
+        editIdeaValue: state.main.editIdea.value,
+        editIdeaCategory: state.main.editIdea.categoryId,
+    });
 }
 
 export default connect(MapStateToProps)(EditIdea);
