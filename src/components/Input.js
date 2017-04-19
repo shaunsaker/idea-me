@@ -11,14 +11,15 @@ export default class Input extends React.Component {
 
     static get propTypes() {
         return {
-            placeholder: React.PropTypes.string.isRequired
+            placeholder: React.PropTypes.string
         };
     }
 
     render() {
         return (
             <FormControl
-                placeholder={this.props.placeholder} 
+                value={this.props.value ? this.props.value : ''}
+                placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                 style={{...styles.input, ...styleConstants.sourceSansPro}} />
         );
     }

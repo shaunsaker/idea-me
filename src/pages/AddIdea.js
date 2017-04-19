@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { browserHistory } from "react-router";
 
 import styles from '../styles/pages/AddIdea';
 import styleConstants from '../styles/styleConstants';

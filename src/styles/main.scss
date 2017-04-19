@@ -21,6 +21,10 @@ p {
     margin-left: -36px; // TODO: dirty fix
 }
 
+.edit-categories button:first-of-type {
+    margin-top: 0 !important;
+}
+
 @media (max-width: 480px) {
     .idea-item {
         display: block !important;

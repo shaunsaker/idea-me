@@ -33,11 +33,15 @@ export default class CategoryDropdownButton extends React.Component {
                     <EditIcon style={styles.editIcon}/>
                     Edit Categories
                 </MenuItem>
-                <MenuItem
-                    eventKey={100}
-                    style={{ ...styles.dropdownItem, ...styleConstants.sourceSansPro }}>
-                    {this.props.initial}
-                </MenuItem>
+                { this.props.initial === 'Select a Category' ?
+                    null
+                    :
+                    <MenuItem
+                        eventKey={100}
+                        style={{ ...styles.dropdownItem, ...styleConstants.sourceSansPro }}>
+                        {this.props.initial}
+                    </MenuItem>
+                }
                 {
                     this.props.categories.map((value, index) => {
                         return (

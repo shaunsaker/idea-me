@@ -5,6 +5,7 @@ import App from "./pages/App";
 import Home from "./pages/Home";
 import Ideas from "./pages/Ideas";
 import AddIdea from "./pages/AddIdea";
+import EditIdea from "./pages/EditIdea";
 import EditCategories from "./pages/EditCategories";
 import RequireAuth from "./components/RequireAuth";
 
@@ -15,6 +16,7 @@ const router = (
       <IndexRoute component={RequireAuth(Home)} />
       <Route path="/ideas" component={RequireAuth(Ideas)} />
       <Route path="/add-idea" component={RequireAuth(AddIdea)} />
+      <Route path="/edit-idea" component={RequireAuth(EditIdea)} />
       <Route path="/edit-categories" component={RequireAuth(EditCategories)} />
     </Route>
   </Router>

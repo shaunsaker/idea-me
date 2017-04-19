@@ -17,6 +17,7 @@ export class Ideas extends React.Component {
     this.navigateBack = this.navigateBack.bind(this);
     this.navigateEditCategories = this.navigateEditCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.editIdea = this.editIdea.bind(this);
 
     this.state = {
       currentCategory: 'All'
@@ -58,6 +59,10 @@ export class Ideas extends React.Component {
     }
   }
 
+  editIdea(idea) {
+    browserHistory.push(`/edit-idea?idea=${idea.idea}&categoryId=${idea.categoryId}`);
+  }
+
   render() {
     const ideas =
       <div className="ideas-container" style={styles.ideasContainer}>
@@ -76,7 +81,7 @@ export class Ideas extends React.Component {
                         :
                         <div></div>
                     }
-                    <EditIcon style={styles.editIcon} />
+                    <EditIcon style={styles.editIcon} onClick={() => this.editIdea(value)}/>
                   </div>
                 </div>
               );
