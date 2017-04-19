@@ -21,7 +21,11 @@ const initialState = {
             idea: 'Create an idea app',
             categoryId: 0
         },
-    ]
+    ],
+    newIdea: {
+        value: null,
+        category: null
+    }
 }
 
 export default initialState;

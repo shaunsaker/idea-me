@@ -20,7 +20,8 @@ export default class Input extends React.Component {
             <FormControl
                 value={this.props.value ? this.props.value : ''}
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
-                style={{...styles.input, ...styleConstants.sourceSansPro}} />
+                style={{...styles.input, ...styleConstants.sourceSansPro}}
+                onChange={(event) => this.props.handleChange(event)} />
         );
     }
 }

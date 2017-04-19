@@ -1,23 +1,20 @@
 import { reducerCall } from './index';
 import initialState from './initialState';
 
-// Import reducers here
-
 export default function main(state = initialState, action) {
     return reducerCall(state, action, reducerClass);
 }
 
-/**
- * Reducer static class
- */
 class reducerClass {
 
-    // Example usage
-    // static toggleLoading(new_state, action) {
+    static UPDATE_NEW_IDEA_VALUE(new_state, action) {
+        new_state.newIdea.value = action.value;
+        return new_state;
+    }
 
-    //     // toggles loading state
-    //     new_state = toggleLoading(new_state, action);
-
-    //     return new_state;
-    // }
+    static UPDATE_NEW_IDEA_CATEGORY(new_state, action) {
+        new_state.newIdea.category = action.value;
+        new_state.newIdea.categoryId = action.id;
+        return new_state;
+    }
 }

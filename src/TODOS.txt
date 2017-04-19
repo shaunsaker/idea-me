@@ -1,8 +1,4 @@
-Add item
-Edit item
-    Delete item
-Add category
-    Delete category
+Nitty Gritty
 Lightbulb gif loader
 Firebase
 

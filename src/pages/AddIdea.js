@@ -15,11 +15,12 @@ export class AddIdea extends React.Component {
     super(props);
 
     this.navigateBack = this.navigateBack.bind(this);
+    this.updateNewIdeaValue = this.updateNewIdeaValue.bind(this);
     this.navigateEditCategories = this.navigateEditCategories.bind(this);  
     this.selectCategory = this.selectCategory.bind(this);
 
     this.state = {
-      currentCategory: 'Select a Category'
+      newIdeaCategory: 'Select a Category'
     }
   }
 
@@ -33,6 +34,13 @@ export class AddIdea extends React.Component {
     this.props.router.goBack();
   }
 
+  updateNewIdeaValue(event) {
+    this.props.dispatch({
+      type: 'main.UPDATE_NEW_IDEA_VALUE',
+      value: event.target.value
+    });
+  }
+
   navigateEditCategories() {
     browserHistory.push('edit-categories');
   }
@@ -42,13 +50,10 @@ export class AddIdea extends React.Component {
     // 100 is reserved for blank categories, 200 is reserved as the edit-categories button
     if (eventId !== 200) {
       if (eventId !== 100) {
-        this.setState({
-          currentCategory: this.props.categories[eventId]
-        });
-      }
-      else {
-        this.setState({
-          currentCategory: 'Select a Category'
+        this.props.dispatch({
+          type: 'main.UPDATE_NEW_IDEA_CATEGORY',
+          value: this.props.categories[eventId],
+          id: eventId
         });
       }
     }
@@ -65,9 +70,11 @@ export class AddIdea extends React.Component {
         <Header handleClick={this.navigateBack} />
         <div style={styles.inputArea}>
           <Input 
-            placeholder="What's the big idea?" />
+            placeholder="What's the big idea?"
+            value={this.props.newIdeaValue}
+            handleChange={this.updateNewIdeaValue} />
           <CategoryDropdownButton 
-            currentCategory={this.state.currentCategory}
+            currentCategory={this.props.newIdeaCategory}
             handleSelect={this.selectCategory}
             categories={this.props.categories} 
             initial='Select a Category' />
@@ -81,7 +88,9 @@ export class AddIdea extends React.Component {
 
 function MapStateToProps(state) {
   return ({
-    categories: state.main.categories
+    categories: state.main.categories,
+    newIdeaValue: state.main.newIdea.value || null,
+    newIdeaCategory: state.main.newIdea.category || 'Select a Category'
   });
 }
 
