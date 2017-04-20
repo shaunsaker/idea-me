@@ -13,8 +13,7 @@ class reducerClass {
     }
 
     static UPDATE_NEW_IDEA_CATEGORY(new_state, action) {
-        new_state.newIdea.category = action.value;
-        new_state.newIdea.categoryId = action.id;
+        new_state.newIdea.categoryId = action.value;
         return new_state;
     }
 
@@ -25,6 +24,70 @@ class reducerClass {
 
     static UPDATE_EDIT_IDEA_CATEGORY(new_state, action) {
         new_state.editIdea.categoryId = action.value;
+        return new_state;
+    }
+
+    static SET_EDIT_IDEA_INDEX(new_state, action) {
+        new_state.editIdea.index = action.index;
+        return new_state;
+    }
+
+    static UPDATE_NEW_CATEGORY_VALUE(new_state, action) {
+        new_state.newCategory.value = action.value;
+        return new_state;
+    }
+
+    static ADD_NEW_IDEA(new_state) {
+        new_state.ideas.unshift(new_state.newIdea);
+        new_state.newIdea = {
+            value: null,
+            categoryId: null
+        }
+        return new_state;
+    }
+
+    static DELETE_IDEA(new_state, action) {
+        new_state.ideas.splice(action.index, 1);      
+        return new_state;
+    }
+    static ADD_NEW_CATEGORY(new_state) {
+        new_state.categories.unshift(new_state.newCategory.value);
+        new_state.newCategory = {
+            value: null,
+        }
+        return new_state;
+    }
+
+    static DELETE_CATEGORY(new_state, action) {
+        new_state.categories.splice(action.index, 1);
+
+        // update ideas categoryIds
+            // set all matching categoryIds to null
+            // all categoryIds above index should be decreased by 1
+        const ideas = new_state.ideas;
+        ideas.map((value, index) => {
+            if (value.categoryId === action.index) {
+                value.categoryId = null;
+            }
+            else if (value.categoryId > action.index) {
+                value.categoryId--;
+            }
+        });
+        
+
+        return new_state;
+    }
+
+    static UPDATE_IDEA(new_state) {
+
+        for (let i = 0; i < new_state.ideas.length; i++) {
+            if (i === new_state.editIdea.index) {
+                new_state.ideas[i].value = new_state.editIdea.value;
+                new_state.ideas[i].categoryId = new_state.editIdea.categoryId;
+                break;
+            }
+        }
+
         return new_state;
     }
 }

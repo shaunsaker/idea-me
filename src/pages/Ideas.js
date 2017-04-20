@@ -3,6 +3,7 @@ import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { DropdownButton, MenuItem } from "react-bootstrap";
 import EditIcon from "react-icons/lib/fa/pencil";
+import DeleteIcon from "react-icons/lib/fa/close";
 
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
@@ -15,9 +16,10 @@ export class Ideas extends React.Component {
     super(props);
 
     this.navigateBack = this.navigateBack.bind(this);
-    this.navigateEditCategories = this.navigateEditCategories.bind(this);
+    this.navigateCategories = this.navigateCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
+    this.deleteIdea = this.deleteIdea.bind(this);
 
     this.state = {
       currentCategory: 'All'
@@ -35,13 +37,13 @@ export class Ideas extends React.Component {
     this.props.router.goBack();
   }
 
-  navigateEditCategories() {
-    browserHistory.push('edit-categories');
+  navigateCategories() {
+    browserHistory.push('categories');
   }
 
   selectCategory(eventId) {
 
-    // 100 is reserved for 'All' categories, 200 is reserved as the edit-categories button
+    // 100 is reserved for 'All' categories, 200 is reserved as the categories button
     if (eventId !== 200) {
       if (eventId !== 100) {
         this.setState({
@@ -55,12 +57,19 @@ export class Ideas extends React.Component {
       }
     }
     else {
-      this.navigateEditCategories();
+      this.navigateCategories();
     }
   }
 
   editIdea(idea) {
-    browserHistory.push(`/edit-idea?idea=${idea.idea}&categoryId=${idea.categoryId}`);
+    browserHistory.push(`/edit-idea?idea=${idea.value}&categoryId=${idea.categoryId}&id=${idea.index}`);
+  }
+  
+  deleteIdea(index) {
+    this.props.dispatch({
+      type: 'main.DELETE_IDEA',
+      index
+    });
   }
 
   render() {
@@ -72,16 +81,21 @@ export class Ideas extends React.Component {
               return (
                 <div key={'idea' + index} style={styles.ideaItem} className="idea-item">
                   <p style={{ ...styles.ideaText, ...styleConstants.sourceSansPro }}>
-                    {value.idea}
+                    {value.value}
                   </p>
                   <div style={styles.labelsContainer} className="label-container">
                     {
-                      this.state.currentCategory == 'All' ?
+                      this.state.currentCategory == 'All' && value.categoryId !== null ?
                         <p style={{ ...styles.ideaChip, ...styleConstants.sourceSansPro }}>{this.props.categories[value.categoryId]}</p>
                         :
                         <div></div>
                     }
-                    <EditIcon style={styles.editIcon} onClick={() => this.editIdea(value)}/>
+                    <EditIcon 
+                      style={styles.editIcon} 
+                      onClick={() => this.editIdea({...value, index})} />
+                    <DeleteIcon
+                      style={styles.deleteIcon}
+                      onClick={() => this.deleteIdea(index)} />
                   </div>
                 </div>
               );

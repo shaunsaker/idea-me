@@ -1,6 +1,7 @@
-Nitty Gritty
+Api calls (Redirect before save (continue using app) - on save, display success/error message)
+
 Lightbulb gif loader
-Firebase
+Firebase User Auth
 
 ENHANCEMENTS
 Ideas count display

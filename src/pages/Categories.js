@@ -1,20 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import EditIcon from "react-icons/lib/fa/pencil";
 import DeleteIcon from "react-icons/lib/fa/close";
 
-import styles from '../styles/pages/EditCategories';
+import styles from '../styles/pages/Categories';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import Input from '../components/Input';
 import FooterButton from '../components/FooterButton';
 
-export class EditCategories extends React.Component {
+export class Categories extends React.Component {
   constructor(props) {
     super(props);
 
     this.navigateBack = this.navigateBack.bind(this);
+    this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   static get propTypes() {
@@ -27,6 +27,13 @@ export class EditCategories extends React.Component {
     this.props.router.goBack();
   }
 
+  deleteCategory(index) {
+    this.props.dispatch({
+      type: 'main.DELETE_CATEGORY',
+      index
+    });
+  }
+
   render() {
     const categories = this.props.categories.map((value, index) => {
       return (
@@ -36,11 +43,10 @@ export class EditCategories extends React.Component {
           <div style={styles.categoryTextContainer}>
             <p style={{ ...styles.categoryText, ...styleConstants.sourceSansPro }}>{value}</p>
           </div>
-          <div style={styles.iconsContainer}>
-            <EditIcon
-              style={styles.editIcon} />
+          <div style={styles.iconContainer}>
             <DeleteIcon
-              style={styles.deleteIcon} />
+              style={styles.deleteIcon} 
+              onClick={() => this.deleteCategory(index)} />
           </div>
         </div>
       )
@@ -48,13 +54,11 @@ export class EditCategories extends React.Component {
 
     return (
       <div
-        className='add-idea edit-categories'
+        className='add-idea categories'
         style={styles.container}>
-        <Header handleClick={this.navigateBack} />
-        <Input
-          placeholder='Add New Category' />
-        <FooterButton
-          text='ADD CATEGORY' />
+        <Header 
+          handleClick={this.navigateBack} 
+          categories={true} />
         <div style={styles.categoriesContainer}>
           {categories}
         </div>
@@ -71,4 +75,4 @@ function MapStateToProps(state) {
   });
 }
 
-export default connect(MapStateToProps)(EditCategories);
+export default connect(MapStateToProps)(Categories);

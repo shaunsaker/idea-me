@@ -18,8 +18,9 @@ export class EditIdea extends React.Component {
 
         this.navigateBack = this.navigateBack.bind(this);
         this.updateEditIdeaValue = this.updateEditIdeaValue.bind(this);
-        this.navigateEditCategories = this.navigateEditCategories.bind(this);
+        this.navigateCategories = this.navigateCategories.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
+        this.updateIdea = this.updateIdea.bind(this);
     }
 
     static get propTypes() {
@@ -27,8 +28,9 @@ export class EditIdea extends React.Component {
             categories: React.PropTypes.array.isRequired,
             initialIdeaValue: React.PropTypes.string.isRequired,
             initialIdeaCategory: React.PropTypes.number.isRequired,
+            editIdeaIndex: React.PropTypes.number.isRequired,  
             editIdeaValue: React.PropTypes.string,
-            editIdeaCategory: React.PropTypes.number
+            editIdeaCategory: React.PropTypes.number,
         };
     }
 
@@ -43,13 +45,13 @@ export class EditIdea extends React.Component {
         });
     }
 
-    navigateEditCategories() {
-        browserHistory.push('edit-categories');
+    navigateCategories() {
+        browserHistory.push('categories');
     }
 
     selectCategory(eventId) {
 
-        // 100 is reserved for blank categories, 200 is reserved as the edit-categories button
+        // 100 is reserved for blank categories, 200 is reserved as the categories button
         if (eventId !== 200) {
             if (eventId !== 100) {
                 this.props.dispatch({
@@ -59,14 +61,41 @@ export class EditIdea extends React.Component {
             }
         }
         else {
-            this.navigateEditCategories();
+            this.navigateCategories();
         }
     }
 
     componentDidMount() {
+
+        // Initial Setup
         this.setState({
-            currentCategory: this.props.categories[this.props.categoryId]
+            currentCategory: this.props.categories[this.props.initialIdeaCategory]
         });
+
+        this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_VALUE',
+            value: this.props.initialIdeaValue,
+        });
+
+        this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_CATEGORY',
+            value: this.props.initialIdeaCategory
+        });
+
+        this.props.dispatch({
+            type: 'main.SET_EDIT_IDEA_INDEX',
+            index: this.props.editIdeaIndex
+        });
+    }
+
+    updateIdea() {
+        // TODO: First we will save this data here, display loading then do the below when apisuccess received
+
+        this.props.dispatch({
+            type: 'main.UPDATE_IDEA'
+        });
+
+        this.navigateBack();
     }
 
     render() {
@@ -80,13 +109,14 @@ export class EditIdea extends React.Component {
                         value={this.props.editIdeaValue ? this.props.editIdeaValue : this.props.initialIdeaValue}
                         handleChange={this.updateEditIdeaValue} />
                     <CategoryDropdownButton
-                        currentCategory={this.props.editIdeaCategory ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
+                        currentCategory={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
                         categories={this.props.categories}
                         initial='Select a Category' />
                 </div>
                 <FooterButton
-                    text='UPDATE IDEA' />
+                    text='UPDATE IDEA' 
+                    handleClick={this.updateIdea} />
             </div >
         );
     }
@@ -97,6 +127,7 @@ function MapStateToProps(state) {
         categories: state.main.categories,
         initialIdeaValue: state.routing.locationBeforeTransitions.query.idea,
         initialIdeaCategory: Number(state.routing.locationBeforeTransitions.query.categoryId),
+        editIdeaIndex: Number(state.routing.locationBeforeTransitions.query.id),
         editIdeaValue: state.main.editIdea.value,
         editIdeaCategory: state.main.editIdea.categoryId,
     });

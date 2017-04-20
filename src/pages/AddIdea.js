@@ -18,8 +18,9 @@ export class AddIdea extends React.Component {
 
     this.navigateBack = this.navigateBack.bind(this);
     this.updateNewIdeaValue = this.updateNewIdeaValue.bind(this);
-    this.navigateEditCategories = this.navigateEditCategories.bind(this);  
+    this.navigateCategories = this.navigateCategories.bind(this);  
     this.selectCategory = this.selectCategory.bind(this);
+    this.addNewIdea = this.addNewIdea.bind(this);
 
     this.state = {
       newIdeaCategory: 'Select a Category'
@@ -43,25 +44,35 @@ export class AddIdea extends React.Component {
     });
   }
 
-  navigateEditCategories() {
-    browserHistory.push('edit-categories');
+  navigateCategories() {
+    browserHistory.push('/categories');
   }
 
   selectCategory(eventId) {
 
-    // 100 is reserved for blank categories, 200 is reserved as the edit-categories button
+    // 100 is reserved for blank categories, 200 is reserved as the categories button
     if (eventId !== 200) {
       if (eventId !== 100) {
         this.props.dispatch({
           type: 'main.UPDATE_NEW_IDEA_CATEGORY',
-          value: this.props.categories[eventId],
-          id: eventId
+          value: eventId,
         });
       }
     }
     else {
-      this.navigateEditCategories();
+      this.navigateCategories();
     }
+  }
+
+  addNewIdea() {
+
+    // TODO: First we will save this data here, display loading then do the below when apisuccess received
+
+    this.props.dispatch({
+      type: 'main.ADD_NEW_IDEA'
+    });
+
+    browserHistory.push('/ideas');
   }
 
   render() {
@@ -69,7 +80,8 @@ export class AddIdea extends React.Component {
       <div 
         className='add-idea'
         style={styles.container}>
-        <Header handleClick={this.navigateBack} />
+        <Header 
+          handleClick={this.navigateBack} />
         <div style={styles.inputArea}>
           <Input 
             placeholder="What's the big idea?"
@@ -82,7 +94,8 @@ export class AddIdea extends React.Component {
             initial='Select a Category' />
         </div>
         <FooterButton
-          text='ADD IDEA' />
+          text='ADD IDEA' 
+          handleClick={this.addNewIdea} />
       </div >
     );
   }
@@ -91,8 +104,8 @@ export class AddIdea extends React.Component {
 function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
-    newIdeaValue: state.main.newIdea.value || null,
-    newIdeaCategory: state.main.newIdea.category || 'Select a Category'
+    newIdeaValue: state.main.newIdea.value,
+    newIdeaCategory: state.main.categories[state.main.newIdea.categoryId] || 'Select a Category'
   });
 }
 

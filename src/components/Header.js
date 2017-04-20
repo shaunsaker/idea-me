@@ -6,7 +6,8 @@ import lightBulb from '../styles/img/lightbulb.png';
 import styles from '../styles/components/Header';
 import styleConstants from '../styles/styleConstants';
 
-import AddIdeaButton from '../components/AddIdeaButton';
+import AddButton from '../components/AddButton';
+import ViewButton from '../components/ViewButton';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -26,12 +27,27 @@ export default class Header extends React.Component {
                 style={styles.icon}
                 onClick={this.props.handleClick} />
             :
-            <div></div>;
+            null;
 
         const addIdeaButton = this.props.ideas ? 
-            <AddIdeaButton size={36} ideas={true} />
+            <AddButton size={36} ideas={true} />
             :
-            <div></div>;
+            null;
+
+        const addCategoryButton = this.props.categories ? 
+            <AddButton size={36} categories={true} />
+            :
+            null; 
+
+        const viewIdeasButton = this.props.viewIdeas ? 
+            <ViewButton size={36} ideas={true} />
+            :
+            null;
+
+        const viewCategoriesButton = this.props.viewCategories ? 
+            <ViewButton size={36} categories={true} />
+            :
+            null;
 
         const homePageStyles = this.props.home ? 
             { justifyContent: 'center' }
@@ -48,6 +64,9 @@ export default class Header extends React.Component {
                     <p style={{ ...styles.title, ...styleConstants.dekko }}>IDEA ME!</p>
                 </div>
                 { addIdeaButton }
+                { addCategoryButton }
+                { viewIdeasButton }
+                { viewCategoriesButton }
             </div>
         );
     }

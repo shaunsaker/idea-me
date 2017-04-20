@@ -18,7 +18,7 @@ const styles = {
     },
     logoContainer: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     image: {

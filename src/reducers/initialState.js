@@ -10,25 +10,29 @@ const initialState = {
     ],
     ideas: [
         {
-            idea: 'Create a recipe app',
+            value: 'Create a recipe app',
             categoryId: 1
         },
         {
-            idea: 'Create an app that takes photos of ingredients and lists any harmful additives',
+            value: 'Create an app that takes photos of ingredients and lists any harmful additives',
             categoryId: 1
         },
         {
-            idea: 'Create an idea app',
+            value: 'Create an idea app',
             categoryId: 0
         },
     ],
     newIdea: {
         value: null,
-        category: null
+        categoryId: null
     },
+    newCategory: {
+        value: null,
+    },  
     editIdea: {
         value: null,
-        categoryId: null
+        categoryId: null,
+        index: null,
     }
 }
 

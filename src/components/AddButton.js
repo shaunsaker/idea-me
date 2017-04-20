@@ -3,10 +3,10 @@ import { Link } from "react-router";
 import { Button } from 'react-bootstrap';
 import PlusIcon from 'react-icons/lib/fa/plus';
 
-import styles from '../styles/components/AddIdeaButton';
+import styles from '../styles/components/AddButton';
 import styleConstants from '../styles/styleConstants';
 
-export default class AddIdeaButton extends React.Component {
+export default class AddButton extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,7 +18,7 @@ export default class AddIdeaButton extends React.Component {
     }
 
     render() {
-        const button = this.props.ideas ?
+        const button = (this.props.ideas || this.props.categories) ?
             <PlusIcon
                 style={{ ...styles.icon, fontSize: this.props.size }} />
             :
@@ -28,8 +28,10 @@ export default class AddIdeaButton extends React.Component {
                     style={{ ...styles.icon, fontSize: this.props.size }} />
             </Button>
 
+        const link = this.props.categories ? '/add-category' : '/add-idea';
+
         return (
-            <Link to='/add-idea'>
+            <Link to={link}>
                 { button }
             </Link>
         );
