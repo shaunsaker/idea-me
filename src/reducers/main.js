@@ -51,7 +51,7 @@ class reducerClass {
         return new_state;
     }
     static ADD_NEW_CATEGORY(new_state) {
-        new_state.categories.unshift(new_state.newCategory.value);
+        new_state.categories.push(new_state.newCategory.value);
         new_state.newCategory = {
             value: null,
         }

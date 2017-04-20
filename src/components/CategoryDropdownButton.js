@@ -12,7 +12,7 @@ export default class CategoryDropdownButton extends React.Component {
 
     static get propTypes() {
         return {
-            currentCategory: React.PropTypes.string.isRequired,
+            currentCategory: React.PropTypes.string,
             handleSelect: React.PropTypes.func.isRequired,
             categories: React.PropTypes.array.isRequired,
             initial: React.PropTypes.string.isRequired,
@@ -24,7 +24,7 @@ export default class CategoryDropdownButton extends React.Component {
             <DropdownButton
                 style={{ ...styles.dropdownButton, ...styleConstants.sourceSansPro }}
                 id='sortDropdown'
-                title={this.props.currentCategory}
+                title={this.props.currentCategory ? this.props.currentCategory : 'Select a Category'}
                 noCaret={true}
                 onSelect={(event) => { this.props.handleSelect(event) }}>
                 <MenuItem

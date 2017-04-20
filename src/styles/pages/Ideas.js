@@ -56,7 +56,8 @@ const styles = {
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+        cursor: 'pointer'
     },
     deleteIcon: {
         color: styleConstants.grey,
@@ -66,7 +67,8 @@ const styles = {
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+        cursor: 'pointer'
     },
     footer: {
         position: 'absolute',

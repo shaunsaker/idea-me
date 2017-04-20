@@ -66,13 +66,16 @@ export class AddIdea extends React.Component {
 
   addNewIdea() {
 
-    // TODO: First we will save this data here, display loading then do the below when apisuccess received
+    if (this.props.newIdeaValue) {
 
-    this.props.dispatch({
-      type: 'main.ADD_NEW_IDEA'
-    });
+      // TODO: First we will save this data here, display loading then do the below when apisuccess received
 
-    browserHistory.push('/ideas');
+      this.props.dispatch({
+        type: 'main.ADD_NEW_IDEA'
+      });
+
+      browserHistory.push('/ideas');
+    }
   }
 
   render() {

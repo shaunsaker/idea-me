@@ -38,11 +38,14 @@ export class AddCategory extends React.Component {
   }
 
   addNewCategory() {
-    this.props.dispatch({
-      type: 'main.ADD_NEW_CATEGORY'
-    });
+    
+    if (this.props.newCategoryValue) {
+      this.props.dispatch({
+        type: 'main.ADD_NEW_CATEGORY'
+      });
 
-    this.navigateBack();
+      this.navigateBack();
+    }
   }
 
   render() {

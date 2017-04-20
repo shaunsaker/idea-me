@@ -3,7 +3,7 @@ import styleConstants from '../styleConstants';
 const styles = {
     headerContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
         top: 0,
@@ -11,10 +11,20 @@ const styles = {
         marginTop: 16,
         width: '100%',
     },
-    icon: {
+    leftIcon: {
         color: styleConstants.white,
         fontSize: 36,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'absolute',
+        left: 0
+    },
+    rightIcon: {
+        color: styleConstants.white,
+        fontSize: 36,
+        cursor: 'pointer',
+        position: 'absolute',
+        right: 0,
+        top: 0
     },
     logoContainer: {
         display: 'flex',

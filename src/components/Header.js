@@ -24,7 +24,7 @@ export default class Header extends React.Component {
     render() {
         const backButton = !this.props.home ?
             <BackIcon 
-                style={styles.icon}
+                style={styles.leftIcon}
                 onClick={this.props.handleClick} />
             :
             null;
@@ -63,10 +63,12 @@ export default class Header extends React.Component {
                     <img src={lightBulb} width={50} height={50} style={styles.image} />
                     <p style={{ ...styles.title, ...styleConstants.dekko }}>IDEA ME!</p>
                 </div>
-                { addIdeaButton }
-                { addCategoryButton }
-                { viewIdeasButton }
-                { viewCategoriesButton }
+                <div style={styles.rightIcon}>
+                    { addIdeaButton }
+                    { addCategoryButton }
+                    { viewIdeasButton }
+                    { viewCategoriesButton }
+                </div>
             </div>
         );
     }

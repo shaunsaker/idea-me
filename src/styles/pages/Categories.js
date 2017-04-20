@@ -14,7 +14,8 @@ const styles = {
         flex: 1,
         width: '100%',
         overflow: 'auto',
-        maxWidth: 720
+        maxWidth: 360,
+        marginBottom: 16
     },
     categoryItem: {
         display: 'flex',
@@ -43,7 +44,8 @@ const styles = {
         fontSize: 41,
         marginLeft: 16,
         minWidth: 41,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+        cursor: 'pointer'
     }
 };
 
