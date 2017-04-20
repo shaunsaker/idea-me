@@ -1,7 +1,8 @@
 const initialState = {
     user: {
         authenticated: true,
-        uid: 'xxx'
+        uid: 'xxx',
+        errorMessage: null
     },
     categories: [
         'Web App',

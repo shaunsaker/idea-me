@@ -9,6 +9,7 @@ class reducerClass {
 
     static UPDATE_NEW_IDEA_VALUE(new_state, action) {
         new_state.newIdea.value = action.value;
+        new_state.user.errorMessage = null;
         return new_state;
     }
 
@@ -88,6 +89,16 @@ class reducerClass {
             }
         }
 
+        return new_state;
+    }
+
+    static USER_ERROR(new_state, action) {
+        new_state.user.errorMessage = action.message;
+        return new_state;
+    }
+
+    static RESET_USER_ERROR(new_state, action) {
+        new_state.user.errorMessage = null;
         return new_state;
     }
 }

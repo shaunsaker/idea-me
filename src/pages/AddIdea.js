@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import CategoryDropdownButton from '../components/CategoryDropdownButton';
 import FooterButton from '../components/FooterButton';
+import ErrorMessage from '../components/ErrorMessage';
 
 export class AddIdea extends React.Component {
   constructor(props) {
@@ -76,30 +77,50 @@ export class AddIdea extends React.Component {
 
       browserHistory.push('/ideas');
     }
+    else {
+      this.props.dispatch({
+        type: 'main.USER_ERROR',
+        message: 'You forgot to enter your idea'
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'main.RESET_USER_ERROR'
+    });
   }
 
   render() {
+    const errorMessage = this.props.errorMessage ?
+      <ErrorMessage text={this.props.errorMessage} />
+      :
+      null;
+
     return (
-      <div 
-        className='add-idea'
-        style={styles.container}>
-        <Header 
-          handleClick={this.navigateBack} />
-        <div style={styles.inputArea}>
-          <Input 
-            placeholder="What's the big idea?"
-            value={this.props.newIdeaValue}
-            handleChange={this.updateNewIdeaValue} />
-          <CategoryDropdownButton 
-            currentCategory={this.props.newIdeaCategory}
-            handleSelect={this.selectCategory}
-            categories={this.props.categories} 
-            initial='Select a Category' />
-        </div>
-        <FooterButton
-          text='ADD IDEA' 
-          handleClick={this.addNewIdea} />
-      </div >
+      <div style={{ height: '100%' }}>
+        <div 
+          className='add-idea'
+          style={styles.container}>
+          <Header 
+            handleClick={this.navigateBack} />
+          <div style={styles.inputArea}>
+            <Input 
+              placeholder="What's the big idea?"
+              value={this.props.newIdeaValue}
+              handleChange={this.updateNewIdeaValue} />
+            <CategoryDropdownButton 
+              currentCategory={this.props.newIdeaCategory}
+              handleSelect={this.selectCategory}
+              categories={this.props.categories} 
+              initial='Select a Category' />
+          </div>
+          <FooterButton
+            text='ADD IDEA' 
+            handleClick={this.addNewIdea} />
+        </div >
+        { errorMessage }
+      </div>
     );
   }
 }
@@ -108,7 +129,8 @@ function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
     newIdeaValue: state.main.newIdea.value,
-    newIdeaCategory: state.main.categories[state.main.newIdea.categoryId] || 'Select a Category'
+    newIdeaCategory: state.main.categories[state.main.newIdea.categoryId] || 'Select a Category',
+    errorMessage: state.main.user.errorMessage
   });
 }
 

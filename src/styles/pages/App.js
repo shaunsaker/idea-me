@@ -6,6 +6,7 @@ const styles = {
         backgroundColor: styleConstants.blue,
         paddingLeft: 16,
         paddingRight: 16,
+        position: 'relative'
     },
 };
 

@@ -48,6 +48,12 @@ export class AddCategory extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'main.RESET_USER_ERROR'
+    });
+  }
+
   render() {
     return (
       <div 
