@@ -43,7 +43,8 @@ const styles = {
         color: styleConstants.white,
         borderRadius: 32,
         marginLeft: 16,
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
     },
     labelsContainer: {
         display: 'flex',
