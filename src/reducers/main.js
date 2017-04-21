@@ -18,10 +18,16 @@ class reducerClass {
         return new_state;
     }
 
+    static REDIRECT_USER_TO_SIGN_IN(new_state, action) {
+        new_state.user.signInRedirect = true;
+        return new_state;
+    } 
+
     static SIGN_IN_USER(new_state, action) {
         new_state.user.authenticated = true;
-        new_state.user.uid = action.uid; // TODO: Check this
+        new_state.user.uid = action.uid;
         new_state.user.errorMessage = null;
+        new_state.user.signInRedirect = false;
 
         return new_state;
     } 

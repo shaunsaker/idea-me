@@ -40,10 +40,14 @@ export class SignIn extends React.Component {
     }
 
     signIn() {
-        if (this.props.userEmail && this.props.userPassword) {
-            console.log('Inputs not blank');
+        if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
+            this.props.dispatch({
+                type: 'signInUser',
+                email: this.props.userEmail,
+                password: this.props.userPassword
+            });
         }
-        else if (this.props.userPassword.length < 6) {
+        else if (this.props.userPassword && this.props.userPassword.length < 6) {
             this.props.dispatch({
                 type: 'main.USER_ERROR',
                 message: 'Password should be at least 6 characters long'

@@ -1,7 +1,7 @@
 import Firebase from '../firebase';
 
 export default class Auth {
-    static getUserAuth(action) {
+    static getUserAuth() {
         return new Promise(resolve => {
             Firebase.auth().onAuthStateChanged(user => {
                 if (user) {
@@ -17,7 +17,7 @@ export default class Auth {
     static signUpUser(action) {
         return new Promise(resolve => {
             Firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
-                .then((user) => {
+                .then((user) => { 
                     resolve(user);
                 })
                 .catch(error => {
@@ -29,7 +29,7 @@ export default class Auth {
     static signInUser(action) {
         return new Promise(resolve => {
             Firebase.auth().signInWithEmailAndPassword(action.email, action.password)
-                .then((user) => {
+                .then((user) => { 
                     resolve(user);
                 })
                 .catch(error => {

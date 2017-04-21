@@ -3,6 +3,7 @@ const initialState = {
         authenticated: null,
         uid: null,
         errorMessage: null,
+        signInRedirect: null,
         email: null,
         password: null
     },
