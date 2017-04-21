@@ -17,7 +17,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div style={styles.container}>
-        <Header home={true} />
+        <Header allowBack={false} />
         <AddButton size={48} />
         <ViewButton size={48} />
       </div >

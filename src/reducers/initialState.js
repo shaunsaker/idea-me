@@ -1,7 +1,7 @@
 const initialState = {
     user: {
-        authenticated: true,
-        uid: 'xxx',
+        authenticated: null,
+        uid: null,
         errorMessage: null,
         email: null,
         password: null

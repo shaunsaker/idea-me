@@ -4,18 +4,18 @@ import { browserHistory } from 'react-router';
 
 export default function (WrappedComponent) {
   class Auth extends React.Component {  
-    // static get propTypes()
-    // {
-    //     return {
-    //       authenticated: React.PropTypes.bool.isRequired
-    //     };
-    // }
+    static get propTypes()
+    {
+        return {
+          authenticated: React.PropTypes.bool.isRequired
+        };
+    }
 
-    // componentWillMount() {
-    //   if (!this.props.authenticated) {
-    //     browserHistory.push('/');
-    //   }
-    // }
+    componentWillMount() {
+      if (!this.props.authenticated) {
+        browserHistory.push('/sign-in');
+      }
+    }
 
     render() {
       return <WrappedComponent {...this.props} />
@@ -23,7 +23,7 @@ export default function (WrappedComponent) {
   }
 
   function mapStateToProps(state) {
-    return { authenticated: true };
+    return { authenticated: state.main.user.authenticated };
   }
 
   return connect(mapStateToProps)(Auth);

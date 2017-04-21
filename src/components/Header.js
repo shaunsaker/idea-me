@@ -22,12 +22,12 @@ export default class Header extends React.Component {
     }
 
     render() {
-        const backButton = !this.props.home ?
+        const backButton = this.props.allowBack === false ?
+            null
+            :
             <BackIcon 
                 style={styles.leftIcon}
-                onClick={this.props.handleClick} />
-            :
-            null;
+                onClick={this.props.handleClick} />;
 
         const addIdeaButton = this.props.ideas ? 
             <AddButton size={36} ideas={true} />

@@ -10,8 +10,13 @@ export default class Input extends React.Component {
     }
 
     static get propTypes() {
+
+        // Note: Value not listed because it could be a number or string
         return {
-            placeholder: React.PropTypes.string
+            placeholder: React.PropTypes.string.isRequired,
+            onChange: React.PropTypes.func.isRequired,
+            value: React.PropTypes.string,
+            type: React.PropTypes.string
         };
     }
 
@@ -21,7 +26,8 @@ export default class Input extends React.Component {
                 value={this.props.value ? this.props.value : ''}
                 placeholder={this.props.placeholder ? this.props.placeholder : ''} 
                 style={{...styles.input, ...styleConstants.sourceSansPro}}
-                onChange={(event) => this.props.handleChange(event)} />
+                onChange={(event) => this.props.handleChange(event)} 
+                type={this.props.type ? this.props.type : 'text'} />
         );
     }
 }

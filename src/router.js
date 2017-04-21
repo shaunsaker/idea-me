@@ -8,6 +8,7 @@ import AddIdea from "./pages/AddIdea";
 import EditIdea from "./pages/EditIdea";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+import SignIn from "./pages/SignIn";
 import RequireAuth from "./components/RequireAuth";
 
 // build the router
@@ -20,6 +21,7 @@ const router = (
       <Route path="/edit-idea" component={RequireAuth(EditIdea)} />
       <Route path="/categories" component={RequireAuth(Categories)} />
       <Route path="/add-category" component={RequireAuth(AddCategory)} />
+      <Route path="/sign-in" component={SignIn} />
     </Route>
   </Router>
 );

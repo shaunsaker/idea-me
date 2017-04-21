@@ -6,6 +6,17 @@ export default function main(state = initialState, action) {
 }
 
 class reducerClass {
+    static UPDATE_USER_EMAIL(new_state, action) {
+        new_state.user.email = action.value;
+        new_state.user.errorMessage = null;
+        return new_state;
+    }
+
+    static UPDATE_USER_PASSWORD(new_state, action) {
+        new_state.user.password = action.value;
+        new_state.user.errorMessage = null;
+        return new_state;
+    }
 
     static UPDATE_NEW_IDEA_VALUE(new_state, action) {
         new_state.newIdea.value = action.value;

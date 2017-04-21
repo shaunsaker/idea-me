@@ -10,6 +10,13 @@ const styles = {
         position: 'relative',
         paddingTop: 92
     },
+    passwordContainer: {
+
+    },
+    passwordText: {
+        color: styleConstants.white,
+        fontSize: 18
+    }
 };
 
 export default styles;
