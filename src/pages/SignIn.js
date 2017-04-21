@@ -16,6 +16,7 @@ export class SignIn extends React.Component {
 
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
+        this.signIn = this.signIn.bind(this);
     }
 
     static get propTypes() {
@@ -38,6 +39,25 @@ export class SignIn extends React.Component {
         });
     }
 
+    signIn() {
+        if (this.props.userEmail && this.props.userPassword) {
+            console.log('Inputs not blank');
+        }
+        else {
+            const emptyInput = this.props.userEmail ? 'password' : 'email';
+
+            this.props.dispatch({
+                type: 'main.USER_ERROR',
+                message: 'You forgot to enter your ' + emptyInput
+            });
+            setTimeout(() => {
+                this.props.dispatch({
+                    type: 'main.RESET_USER_ERROR'
+                });
+            }, 2500);
+        }
+    }
+
     render() {
         const errorMessage = this.props.errorMessage ?
             <ErrorMessage text={this.props.errorMessage} />
@@ -58,13 +78,14 @@ export class SignIn extends React.Component {
                             <Input
                                 placeholder="Password..."
                                 value={this.props.userPassword}
-                                handleChange={this.updateUserPassword} 
+                                handleChange={this.updateUserPassword}
                                 type='password' />
                             <p style={{ ...styles.passwordText, ...styleConstants.sourceSansPro }}>*Password at least 6 characters long</p>
                         </div>
                     </div>
                     <FooterButton
-                        text='SIGN IN' />
+                        text='SIGN IN'
+                        handleClick={this.signIn} />
                 </div>
                 {errorMessage}
             </div>
