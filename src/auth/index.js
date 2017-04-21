@@ -1,65 +1,40 @@
 import Firebase from '../firebase';
 
-const response = {
-    message: "",
-    success: false
-}
-
 export default class Auth {
-    static signUpUser(values) {   
-        return new Promise(resolve => {
-            Firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
-                .then(() => {
-                    response.success = true;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
-    static signInUser(values) {
-        return new Promise(resolve => {
-            Firebase.auth().signInWithEmailAndPassword(values.email, values.password)
-                .then(() => {
-                    response.success = true;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
-    static signOutUser(values) {
-        return new Promise(resolve => {
-            Firebase.auth().signOut()
-                .then(() => {
-                    response.success = true;
-                    resolve(response);
-                })
-                .catch(error => {
-                    response.message = error.message;
-                    resolve(response);
-                });
-        });
-    }
-
-    static userAuth(action) {
+    static getUserAuth(action) {
         return new Promise(resolve => {
             Firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    response.success = true;
-                    response.message = user;
-                    resolve(response);
+                    resolve(user);
                 }
                 else {
-                    resolve(response);
+                    resolve(false);
                 }
             });
+        });
+    }
+
+    static signUpUser(action) {
+        return new Promise(resolve => {
+            Firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
+                .then((user) => {
+                    resolve(user);
+                })
+                .catch(error => {
+                    resolve(error);
+                });
+        });
+    }
+
+    static signInUser(action) {
+        return new Promise(resolve => {
+            Firebase.auth().signInWithEmailAndPassword(action.email, action.password)
+                .then((user) => {
+                    resolve(user);
+                })
+                .catch(error => {
+                    resolve(error);
+                });
         });
     }
 }

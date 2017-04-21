@@ -2,77 +2,40 @@ import { call, put } from 'redux-saga/effects';
 
 import Auth from '../auth/index';
 
-export function* signUpUser(action) {
-    const response = yield call(Auth.signUpUser, action.values);
+export function* getUserAuth(action) {
 
-    // Check if we signed up successfully or return error
-    if (response) {
-        if (response.success) {
+    const getUserAuthResponse = yield call(Auth.getUserAuth, action);
+
+    if (getUserAuthResponse) {
+        yield put({
+            type: 'main.SIGN_IN_USER',
+            info: getUserAuthResponse
+        });
+    }
+    else {
+        const signUpUserResponse = yield call(Auth.signUpUser, action);
+
+        if (signUpUserResponse) {
             yield put({
-                type: 'main.signIn'
+                type: 'main.SIGN_IN_USER',
+                info: signUpUserResponse
             });
         }
         else {
-            yield put({
-                type: 'main.authError',
-                error: response.message
-            })
+            const signInUserResponse = yield call(Auth.signInUser, action);
+
+            if (signInUserResponse) {
+                yield put({
+                    type: 'main.SIGN_IN_USER',
+                    info: signInUserResponse
+                });
+            }
+            else {
+                yield put({
+                    type: 'main.USER_ERROR',
+                    message: signInUserResponse // TODO: Check this
+                });
+            }
         }
     }
-}
-
-export function* signInUser(action) {
-    const response = yield call(Auth.signInUser, action.values);
-
-    // Check if we signed in successfully or return error
-    if (response) {
-        if (response.success) {
-            yield put({
-                type: 'main.signIn'
-            });
-        }
-        else {
-            yield put({
-                type: 'main.authError',
-                error: response.message
-            });
-        }
-    }
-}
-
-export function* signOutUser(action) {
-    const response = yield call(Auth.signOutUser, action);
-
-    if (response) {
-        if (response.success) {
-            yield put({
-                type: 'main.signOut'
-            });
-        }
-        else {
-            yield put({
-                type: 'main.authError',
-                error: response.message
-            });
-        }
-    }
-}
-
-export function* userAuth(action) {
-
-    const response = yield call(Auth.userAuth, action);
-
-    if (response) {
-        if (response.success) {
-            yield put({
-                type: 'main.signIn',
-                uid: response.message.uid
-            });
-        }
-        else {
-            yield put({
-                type: 'main.signOut'
-            });
-        }
-    } 
 }
