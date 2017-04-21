@@ -26,7 +26,7 @@ const styles = {
         padding: 16,
         flexWrap: 'wrap',
         backgroundColor: styleConstants.white,
-        borderRadius: 16,
+        borderRadius: 32,
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
     },
     categoryTextContainer: {

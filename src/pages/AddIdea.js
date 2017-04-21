@@ -19,7 +19,7 @@ export class AddIdea extends React.Component {
 
     this.navigateBack = this.navigateBack.bind(this);
     this.updateNewIdeaValue = this.updateNewIdeaValue.bind(this);
-    this.navigateCategories = this.navigateCategories.bind(this);  
+    this.navigateCategories = this.navigateCategories.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
     this.addNewIdea = this.addNewIdea.bind(this);
 
@@ -31,6 +31,9 @@ export class AddIdea extends React.Component {
   static get propTypes() {
     return {
       categories: React.PropTypes.array.isRequired,
+      newIdeaValue: React.PropTypes.string,
+      newIdeaCategory: React.PropTypes.string,
+      errorMessage: React.PropTypes.string
     };
   }
 
@@ -82,6 +85,11 @@ export class AddIdea extends React.Component {
         type: 'main.USER_ERROR',
         message: 'You forgot to enter your idea'
       });
+      setTimeout(() => {
+        this.props.dispatch({
+          type: 'main.RESET_USER_ERROR'
+        });
+      }, 2500);
     }
   }
 
@@ -99,27 +107,27 @@ export class AddIdea extends React.Component {
 
     return (
       <div style={{ height: '100%' }}>
-        <div 
+        <div
           className='add-idea'
           style={styles.container}>
-          <Header 
+          <Header
             handleClick={this.navigateBack} />
           <div style={styles.inputArea}>
-            <Input 
+            <Input
               placeholder="What's the big idea?"
               value={this.props.newIdeaValue}
               handleChange={this.updateNewIdeaValue} />
-            <CategoryDropdownButton 
+            <CategoryDropdownButton
               currentCategory={this.props.newIdeaCategory}
               handleSelect={this.selectCategory}
-              categories={this.props.categories} 
+              categories={this.props.categories}
               initial='Select a Category' />
           </div>
           <FooterButton
-            text='ADD IDEA' 
+            text='ADD IDEA'
             handleClick={this.addNewIdea} />
         </div >
-        { errorMessage }
+        {errorMessage}
       </div>
     );
   }

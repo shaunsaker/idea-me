@@ -2,7 +2,9 @@ const initialState = {
     user: {
         authenticated: true,
         uid: 'xxx',
-        errorMessage: null
+        errorMessage: null,
+        email: null,
+        password: null
     },
     categories: [
         'Web App',

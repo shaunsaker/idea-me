@@ -1,5 +1,6 @@
 import React from "react";
 import { Motion, spring } from 'react-motion';
+import WarningIcon from "react-icons/lib/fa/exclamation-triangle";
 
 import styles from '../styles/components/ErrorMessage';
 import styleConstants from '../styles/styleConstants';
@@ -25,7 +26,7 @@ export default class ErrorMessage extends React.Component {
                 this.setState({
                     showErrorMessage: false
                 });
-            }, 3000);
+            }, 2000);
         }
     }
 
@@ -33,10 +34,11 @@ export default class ErrorMessage extends React.Component {
         const errorMessage = this.state.showErrorMessage ?
             <Motion
                 defaultStyle={{ bottom: -105 }}
-                style={{ bottom: spring(0) }}>
+                style={{ bottom: spring(16) }}>
                 {
                 (style) =>
                     <div key='errorMessage' style={{...styles.errorMessageContainer, ...style}}>
+                        <WarningIcon style={styles.icon} />
                         <p style={{...styles.errorMessageText, ...styleConstants.sourceSansPro}}>
                             { this.props.text }
                         </p>
@@ -45,8 +47,8 @@ export default class ErrorMessage extends React.Component {
             </Motion>
             :
             <Motion
-                defaultStyle={{ bottom: 0 }}
-                style={{ bottom: spring(-105) }}>
+                defaultStyle={{ bottom: 16 }}
+                style={{ bottom: spring(-150) }}>
                 {
                 (style) =>
                     <div key='errorMessage' style={{...styles.errorMessageContainer, ...style}}>
