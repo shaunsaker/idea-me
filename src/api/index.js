@@ -1,34 +1,34 @@
 import Firebase from '../firebase';
 
 const response = {
-    message: "",
-    success: false
+    success: null,
+    message: null,
 }
 
 export default class ApiData {
     static saveUserData(action) {
-        // let uid = action.uid;
+        let uid = action.uid;
 
-        // // If we did not receive the uid via props, get the uid from Firebase
-        // if (!uid) {
-        //     uid = Firebase.auth().currentUser.uid;
-        // }
+        // If we did not receive the uid via props, get the uid from Firebase
+        if (!uid) {
+            uid = Firebase.auth().currentUser.uid;
+        }
         
-        // const userData = action.currentGame;
+        const userData = action.ideas;
 
-        // return new Promise(resolve => { 
-        //     Firebase.database().ref(uid).update({
-        //         currentGame: userData
-        //     })
-        //     .then(() => {
-        //         response.success = true;
-        //         resolve(response);
-        //     })
-        //     .catch(error => {
-        //         response.message = error.message;
-        //         resolve(response);
-        //     });
-        // });
+        return new Promise(resolve => { 
+            Firebase.database().ref(uid).update({
+                ideas: userData
+            })
+            .then(() => {
+                response.success = true;
+                resolve(response);
+            })
+            .catch(error => {
+                response.message = error.message;
+                resolve(response);
+            });
+        });
     }
 
     static loadUserData(action) {

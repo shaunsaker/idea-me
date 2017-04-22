@@ -4,19 +4,19 @@ import ApiData from '../api/index';
 
 export function* saveData(action) {
 
-    const response = yield call(ApiData.saveUserData, action);
+    const saveResponse = yield call(ApiData.saveUserData, action);
+    console.log(saveResponse);
 
-    if (response) {
-        if (response.success) {
+    if (saveResponse) {
+        if (saveResponse.success) {
             yield put({
-                type: 'main.apiSuccess',
-                message: 'Game saved.'
+                type: 'main.API_SAVE_SUCCESS',
             });
         }
         else {
             yield put({
-                type: 'main.apiError',
-                message: response.message
+                type: 'main.USER_ERROR',
+                message: saveResponse.message // TODO: Check this
             });
         }
     } 
@@ -24,19 +24,20 @@ export function* saveData(action) {
 
 export function* loadData(action) {
 
-    const response = yield call(ApiData.loadUserData, action);
+    const loadResponse = yield call(ApiData.loadUserData, action);
+    console.log(loadResponse);
 
-    if (response) {
-        if (response.success) {
+    if (loadResponse) {
+        if (loadResponse.success) {
             yield put({
                 type: 'main.apiLoadGame',
-                data: response.message
+                data: loadResponse.message
             });
         }
         else {
             yield put({
                 type: 'main.apiError',
-                message: response.message
+                message: loadResponse.message
             });
         }
     } 

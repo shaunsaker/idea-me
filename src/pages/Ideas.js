@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { DropdownButton, MenuItem } from "react-bootstrap";
 import EditIcon from "react-icons/lib/fa/pencil";
 import DeleteIcon from "react-icons/lib/fa/close";
+import FooterButton from "../components/FooterButton";
 
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
@@ -20,16 +21,20 @@ export class Ideas extends React.Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
+    this.saveIdeas = this.saveIdeas.bind(this);
 
     this.state = {
-      currentCategory: 'All'
+      currentCategory: 'All',
+      loading: false
     }
   }
 
   static get propTypes() {
     return {
       categories: React.PropTypes.array.isRequired,
-      ideas: React.PropTypes.array.isRequired
+      ideas: React.PropTypes.array.isRequired,
+      errorMessage: React.PropTypes.string,
+      apiSuccess: React.PropTypes.bool,
     };
   }
 
@@ -70,6 +75,32 @@ export class Ideas extends React.Component {
       type: 'main.DELETE_IDEA',
       index
     });
+  }
+
+  saveIdeas() {
+    this.setState({
+      loading: true
+    });
+
+    this.props.dispatch({
+      type: 'main.RESET_API_SUCCESS'
+    });
+
+    this.props.dispatch({
+      type: 'saveData',
+      uid: this.props.uid,
+      ideas: this.props.ideas
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.props.errorMessage || this.props.apiSuccess) {
+      if (this.state.loading) {
+        this.setState({
+          loading: false
+        });
+      }
+    }
   }
 
   render() {
@@ -116,6 +147,10 @@ export class Ideas extends React.Component {
           initial='All'
         />
         {ideas}
+        <FooterButton 
+          text='SAVE IDEAS'
+          handleClick={this.saveIdeas}
+          loading={this.state.loading} />
       </div >
     );
   }
@@ -125,6 +160,9 @@ function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
     ideas: state.main.ideas,
+    uid: state.main.user.uid,
+    errorMessage: state.main.user.errorMessage,
+    apiSuccess: state.main.user.apiSuccess,
   });
 }
 

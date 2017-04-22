@@ -28,7 +28,16 @@ class reducerClass {
         new_state.user.uid = action.uid;
         new_state.user.errorMessage = null;
         new_state.user.signInRedirect = false;
+        return new_state;
+    } 
 
+    static API_SAVE_SUCCESS(new_state, action) {
+        new_state.user.apiSuccess = true;
+        return new_state;
+    }
+
+    static RESET_API_SUCCESS(new_state, action) {
+        new_state.user.apiSuccess = false;
         return new_state;
     } 
 

@@ -5,7 +5,8 @@ const initialState = {
         errorMessage: null,
         signInRedirect: null,
         email: null,
-        password: null
+        password: null,
+        apiSuccess: null
     },
     categories: [
         'Web App',
