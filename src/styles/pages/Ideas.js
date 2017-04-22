@@ -11,6 +11,13 @@ const styles = {
         paddingTop: 92,
         paddingBottom: 16,
     },
+    infoContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        position: 'relative',
+        width: '100%',
+        maxWidth: 720
+    },
     ideasContainer: {
         flex: 1,
         width: '100%',

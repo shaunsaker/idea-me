@@ -11,6 +11,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import CategoryDropdownButton from '../components/CategoryDropdownButton';
+import Count from '../components/Count';
 
 export class Ideas extends React.Component {
   constructor(props) {
@@ -105,11 +106,15 @@ export class Ideas extends React.Component {
   }
 
   render() {
+    let counter = 0;
+
     const ideas =
       <div className="ideas-container" style={styles.ideasContainer}>
         {
           this.props.ideas.map((value, index) => {
             if (this.state.currentCategory === 'All' || this.props.categories[value.categoryId] === this.state.currentCategory) {
+              counter++;
+
               return (
                 <div key={'idea' + index} style={styles.ideaItem} className="idea-item">
                   <p style={{ ...styles.ideaText, ...styleConstants.sourceSansPro }}>
@@ -141,12 +146,18 @@ export class Ideas extends React.Component {
         <Header
           handleClick={this.navigateBack}
           ideas={true} />
-        <CategoryDropdownButton
-          currentCategory={this.state.currentCategory}
-          handleSelect={this.selectCategory}
-          categories={this.props.categories}
-          initial='All'
-        />
+        <div id='infoContainer' style={styles.infoContainer}>
+          <CategoryDropdownButton
+            currentCategory={this.state.currentCategory}
+            handleSelect={this.selectCategory}
+            categories={this.props.categories}
+            initial='All'
+          />
+          <Count
+            count={counter}
+            total={this.props.ideas.length} 
+            unit='ideas'/>
+        </div>
         {ideas}
         <FooterButton 
           text='SAVE IDEAS'

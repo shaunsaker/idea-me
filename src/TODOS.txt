@@ -4,7 +4,5 @@ TODOS
 
 ENHANCEMENTS
 
-Logo should take you to your ideas
-Ideas count display
 Idea has title (input) and description (textarea)
 Ideas have priorities (high, medium, low)
