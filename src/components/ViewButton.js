@@ -14,28 +14,18 @@ export default class ViewButton extends React.Component {
     static get propTypes() {
         return {
             size: React.PropTypes.number.isRequired,
-            ideas: React.PropTypes.bool,
-            categories: React.PropTypes.bool
+            handleClick: React.PropTypes.func.isRequired
         };
     }
 
     render() {
-        const button = (this.props.ideas || this.props.categories) ?
-            <EyeIcon
-                style={{ ...styles.icon, fontSize: this.props.size }} />
-            :
+        return (
             <Button
-                style={styles.button} >
+                style={styles.button} 
+                onClick={this.props.handleClick} >
                 <EyeIcon
                     style={{ ...styles.icon, fontSize: this.props.size }} />
             </Button>
-
-        const link = this.props.categories ? '/categories' : '/ideas';
-
-        return (
-            <Link to={link}>
-                { button }
-            </Link>
         );
     }
 }

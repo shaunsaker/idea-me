@@ -19,7 +19,9 @@ export default class Home extends React.Component {
       <div style={styles.container}>
         <Header allowBack={false} />
         <AddButton size={48} />
-        <ViewButton size={48} />
+        <ViewButton 
+          size={48} 
+          handleClick={this.loadUserData} />
       </div >
     );
   }
