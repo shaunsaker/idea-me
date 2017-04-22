@@ -10,6 +10,7 @@ import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
 import SignIn from "./pages/SignIn";
 import RequireAuth from "./components/RequireAuth";
+import NotFound from "./pages/NotFound";
 
 // build the router
 const router = (
@@ -22,6 +23,7 @@ const router = (
       <Route path="/categories" component={RequireAuth(Categories)} />
       <Route path="/add-category" component={RequireAuth(AddCategory)} />
       <Route path="/sign-in" component={SignIn} />
+      <Route path="*" component={RequireAuth(NotFound)} />
     </Route>
   </Router>
 );
