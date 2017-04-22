@@ -5,10 +5,6 @@ TODOS
 ENHANCEMENTS
 
 Logo should take you to your ideas
+Ideas count display
 Idea has title (input) and description (textarea)
 Ideas have priorities (high, medium, low)
-Ideas count display
-Different colour labels
-Lightbulb gif loader
-Reorder ideas functionality?
-Custom scrollbar

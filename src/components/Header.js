@@ -1,4 +1,5 @@
 import React from "react";
+import { browserHistory } from "react-router";
 import { Button } from 'react-bootstrap';
 import BackIcon from 'react-icons/lib/fa/chevron-left';
 import lightBulb from '../styles/img/lightbulb.png';
@@ -12,6 +13,8 @@ import ViewButton from '../components/ViewButton';
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
+
+        this.navigateIdeas = this.navigateIdeas.bind(this);
     }
 
     static get propTypes()
@@ -19,6 +22,10 @@ export default class Header extends React.Component {
         return {
           handleClick: React.PropTypes.func
         };
+    }
+
+    navigateIdeas(){
+        browserHistory.push('/ideas');
     }
 
     render() {
@@ -59,7 +66,8 @@ export default class Header extends React.Component {
                 { backButton }
                 <div
                     className='logo-container' 
-                    style={styles.logoContainer}>
+                    style={styles.logoContainer} 
+                    onClick={this.navigateIdeas}>
                     <img src={lightBulb} width={50} height={50} style={styles.image} />
                     <p style={{ ...styles.title, ...styleConstants.dekko }}>IDEA ME!</p>
                 </div>
