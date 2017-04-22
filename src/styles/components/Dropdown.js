@@ -5,7 +5,7 @@ const styles = {
         width: 200,
         fontSize: 18,
         borderRadius: 32,
-        marginBottom: 32,
+        marginBottom: 16,
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
         width: 280
     },

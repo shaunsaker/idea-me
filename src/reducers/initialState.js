@@ -9,6 +9,11 @@ const initialState = {
         apiSaveSuccess: null,
         apiLoadSuccess: null,
     },
+    priorities: [
+        'High',
+        'Medium',
+        'Low'
+    ],
     categories: [
       
     ],
@@ -18,7 +23,8 @@ const initialState = {
     newIdea: {
         title: null,
         description: null,
-        categoryId: null
+        categoryId: null,
+        priorityId: null,
     },
     newCategory: {
         value: null,
@@ -27,6 +33,7 @@ const initialState = {
         title: null,
         description: null,
         categoryId: null,
+        priorityId: null,
         index: null,
     }
 }

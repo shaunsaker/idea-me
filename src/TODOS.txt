@@ -1,8 +1,6 @@
 TODOS
 
-Test responsiveness on mobile and firefox
-    Including animations (error message)
-Fix bug first time login does not fetch data
+In ideas page, not seeing all categories option anymore
 
 ENHANCEMENTS
 

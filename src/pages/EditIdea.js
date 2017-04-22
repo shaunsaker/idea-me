@@ -10,7 +10,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
-import CategoryDropdownButton from '../components/CategoryDropdownButton';
+import Dropdown from '../components/Dropdown';
 import FooterButton from '../components/FooterButton';
 
 export class EditIdea extends React.Component {
@@ -22,19 +22,23 @@ export class EditIdea extends React.Component {
         this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(this);
         this.navigateCategories = this.navigateCategories.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
+        this.selectPriority = this.selectPriority.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
     }
 
     static get propTypes() {
         return {
             categories: React.PropTypes.array.isRequired,
+            priorities: React.PropTypes.array.isRequired,
             initialIdeaTitle: React.PropTypes.string.isRequired,
             initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.number.isRequired,
-            editIdeaIndex: React.PropTypes.number.isRequired,  
+            initialIdeaPriority: React.PropTypes.number.isRequired,
+            editIdeaIndex: React.PropTypes.number.isRequired,
             editIdeaTitle: React.PropTypes.string,
             editIdeaDescription: React.PropTypes.string,
             editIdeaCategory: React.PropTypes.number,
+            editIdeaPriority: React.PropTypes.number,
         };
     }
 
@@ -76,6 +80,17 @@ export class EditIdea extends React.Component {
         }
     }
 
+    selectPriority(eventId) {
+
+        // 100 is reserved for blank priority
+        if (eventId !== 100) {
+            this.props.dispatch({
+                type: 'main.UPDATE_EDIT_IDEA_PRIORITY',
+                value: eventId,
+            });
+        }
+    }
+
     componentDidMount() {
 
         // Initial Setup
@@ -99,6 +114,11 @@ export class EditIdea extends React.Component {
         });
 
         this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_PRIORITY',
+            value: this.props.initialIdeaPriority
+        });
+
+        this.props.dispatch({
             type: 'main.SET_EDIT_IDEA_INDEX',
             index: this.props.editIdeaIndex
         });
@@ -113,7 +133,6 @@ export class EditIdea extends React.Component {
     }
 
     render() {
-        console.log(this.props.editIdeaDescription)
         return (
             <div
                 className='add-idea'
@@ -125,16 +144,22 @@ export class EditIdea extends React.Component {
                         handleChange={this.updateEditIdeaTitle} />
                     <TextArea
                         value={this.props.editIdeaDescription ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
-                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...' }
-                        handleChange={this.updateEditIdeaDescription} />   
-                    <CategoryDropdownButton
-                        currentCategory={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
+                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...'}
+                        handleChange={this.updateEditIdeaDescription} />
+                    <Dropdown
+                        displayText='Select a Category'
+                        value={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
-                        categories={this.props.categories}
-                        initial='Select a Category' />
+                        values={this.props.categories}
+                        editItem={true} />
+                    <Dropdown
+                        displayText='Select a Priority'
+                        value={this.props.editIdeaPriority !== null ? this.props.priorities[this.props.editIdeaPriority] : this.props.priorities[this.props.initialIdeaPriority]}
+                        handleSelect={this.selectPriority}
+                        values={this.props.priorities} />
                 </div>
                 <FooterButton
-                    text='UPDATE IDEA' 
+                    text='UPDATE IDEA'
                     handleClick={this.updateIdea} />
             </div >
         );
@@ -144,13 +169,16 @@ export class EditIdea extends React.Component {
 function MapStateToProps(state) {
     return ({
         categories: state.main.categories,
+        priorities: state.main.priorities,
         initialIdeaTitle: state.routing.locationBeforeTransitions.query.title,
         initialIdeaDescription: state.routing.locationBeforeTransitions.query.description,
         initialIdeaCategory: Number(state.routing.locationBeforeTransitions.query.categoryId),
+        initialIdeaPriority: Number(state.routing.locationBeforeTransitions.query.priorityId),
         editIdeaIndex: Number(state.routing.locationBeforeTransitions.query.id),
         editIdeaTitle: state.main.editIdea.title,
         editIdeaDescription: state.main.editIdea.description,
         editIdeaCategory: state.main.editIdea.categoryId,
+        editIdeaPriority: state.main.editIdea.priorityId,
     });
 }
 

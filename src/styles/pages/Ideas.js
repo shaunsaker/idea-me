@@ -9,7 +9,6 @@ const styles = {
         alignItems: 'center',
         position: 'relative',
         paddingTop: 92,
-        paddingBottom: 16,
     },
     infoContainer: {
         display: 'flex',
@@ -23,9 +22,6 @@ const styles = {
         width: '100%',
         overflow: 'auto',
         maxWidth: 720,
-        borderBottomWidth: 4,
-        borderBottomStyle: 'solid',
-        borderColor: styleConstants.clearWhite
     },
     ideaItem: {
         display: 'flex',
@@ -63,14 +59,21 @@ const styles = {
         color: styleConstants.white,
         borderRadius: 32,
         marginLeft: 16,
-        whiteSpace: 'nowrap',
         boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24)',
+    },
+    priority: {
+        fontWeight: 700,
+        display: 'flex',
+        justifyContent: 'center',
+        width: 41,
+        height: 41,
+        backgroundColor: styleConstants.white,
+        color: styleConstants.blue
     },
     labelsContainer: {
         display: 'flex',
         flex: 1,
         justifyContent: 'flex-end',
-        flexWrap: 'wrap'
     },
     editIcon: {
         color: styleConstants.blue,

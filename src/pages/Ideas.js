@@ -10,7 +10,7 @@ import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
-import CategoryDropdownButton from '../components/CategoryDropdownButton';
+import Dropdown from '../components/Dropdown';
 import Count from '../components/Count';
 
 export class Ideas extends React.Component {
@@ -32,8 +32,8 @@ export class Ideas extends React.Component {
 
   static get propTypes() {
     return {
-      categories: React.PropTypes.array.isRequired,
-      ideas: React.PropTypes.array.isRequired,
+      categories: React.PropTypes.array,
+      ideas: React.PropTypes.array,
       uid: React.PropTypes.string.isRequired,
       errorMessage: React.PropTypes.string,
       apiSaveSuccess: React.PropTypes.bool,
@@ -69,7 +69,7 @@ export class Ideas extends React.Component {
   }
 
   editIdea(idea) {
-    browserHistory.push(`/edit-idea?title=${idea.title}&description=${idea.description}&categoryId=${idea.categoryId}&id=${idea.index}`);
+    browserHistory.push(`/edit-idea?title=${idea.title}&description=${idea.description}&categoryId=${idea.categoryId}&priorityId=${idea.priorityId}&id=${idea.index}`);
   }
 
   deleteIdea(index) {
@@ -107,44 +107,90 @@ export class Ideas extends React.Component {
 
   render() {
     let counter = 0;
+    let ideas = <div style={{flex: 1}}></div>;
 
-    const ideas =
-      <div className="ideas-container" style={styles.ideasContainer}>
-        {
-          this.props.ideas.map((value, index) => {
-            if (this.state.currentCategory === 'All' || this.props.categories[value.categoryId] === this.state.currentCategory) {
-              counter++;
+    if (this.props.ideas) {
+      let noPriority = [];
+      let highPriority = [];
+      let mediumPriority = [];
+      let lowPriority = [];
+      let allIdeas = [];
 
-              return (
-                <div key={'idea' + index} style={styles.ideaItem} className="idea-item">
-                  <div style={styles.textContainer}>
-                    <p style={{ ...styles.ideaTextTitle, ...styleConstants.sourceSansPro }}>
-                      {value.title}
-                    </p>
-                    <p style={{ ...styles.ideaTextDescription, ...styleConstants.sourceSansPro }}>
-                      {value.description}
-                    </p>
-                  </div>
-                  <div style={styles.labelsContainer} className="label-container">
-                    {
-                      this.state.currentCategory == 'All' && (value.categoryId === 0 || value.categoryId) ?
-                        <p style={{ ...styles.ideaChip, ...styleConstants.sourceSansPro }}>{this.props.categories[value.categoryId]}</p>
-                        :
-                        <div></div>
-                    }
-                    <EditIcon
-                      style={styles.editIcon}
-                      onClick={() => this.editIdea({ ...value, index })} />
-                    <DeleteIcon
-                      style={styles.deleteIcon}
-                      onClick={() => this.deleteIdea(index)} />
-                  </div>
-                </div>
-              );
-            }
-          })
+      this.props.ideas.map((value) => {
+        if (value.priorityId === 0) {
+          highPriority.push(value);
         }
-      </div>
+        else if (value.priorityId === 1) {
+          mediumPriority.push(value);
+        }
+        else if (value.priorityId === 2) {
+          lowPriority.push(value);
+        }
+        else {
+          noPriority.push(value);
+        }
+      });
+
+      noPriority.map((value) => {
+        allIdeas.push(value);
+      });
+
+      highPriority.map((value) => {
+        allIdeas.push(value);
+      });
+
+      mediumPriority.map((value) => {
+        allIdeas.push(value);
+      });
+
+      lowPriority.map((value) => {
+        allIdeas.push(value);
+      });
+
+      ideas =
+        <div className="ideas-container" style={styles.ideasContainer}>
+          {
+            allIdeas.map((value, index) => {
+              if (this.state.currentCategory === 'All' || this.props.categories[value.categoryId] === this.state.currentCategory) {
+                counter++;
+
+                return (
+                  <div key={'idea' + index} style={styles.ideaItem} className="idea-item">
+                    <div style={styles.textContainer}>
+                      <p style={{ ...styles.ideaTextTitle, ...styleConstants.sourceSansPro }}>
+                        {value.title}
+                      </p>
+                      <p style={{ ...styles.ideaTextDescription, ...styleConstants.sourceSansPro }}>
+                        {value.description}
+                      </p>
+                    </div>
+                    <div style={styles.labelsContainer} className="label-container">
+                      {
+                        this.state.currentCategory == 'All' && (value.categoryId === 0 || value.categoryId) ?
+                          <p style={{ ...styles.ideaChip, ...styleConstants.sourceSansPro }}>{this.props.categories[value.categoryId]}</p>
+                          :
+                          <div></div>
+                      }
+                      {
+                        value.priorityId === 0 || value.priorityId ?
+                          <p style={{ ...styles.ideaChip, ...styles.priority, ...styleConstants.sourceSansPro }}>{this.props.priorities[value.priorityId].split('')[0]}</p>
+                          :
+                          <div></div>
+                      }
+                      <EditIcon
+                        style={styles.editIcon}
+                        onClick={() => this.editIdea({ ...value, index })} />
+                      <DeleteIcon
+                        style={styles.deleteIcon}
+                        onClick={() => this.deleteIdea(index)} />
+                    </div>
+                  </div>
+                );
+              }
+            })
+          }
+        </div>;
+    }
 
     return (
       <div style={styles.container}>
@@ -152,15 +198,14 @@ export class Ideas extends React.Component {
           handleClick={this.navigateBack}
           ideas={true} />
         <div id='infoContainer' style={styles.infoContainer}>
-          <CategoryDropdownButton
-            currentCategory={this.state.currentCategory}
+          <Dropdown
+            value={this.state.currentCategory}
             handleSelect={this.selectCategory}
-            categories={this.props.categories}
-            initial='All'
-          />
+            values={this.props.categories}
+            editItem={true} />
           <Count
             count={counter}
-            total={this.props.ideas.length}
+            total={this.props.ideas ? this.props.ideas.length : 0}
             unit='ideas' />
         </div>
         {ideas}
@@ -176,6 +221,7 @@ export class Ideas extends React.Component {
 function MapStateToProps(state) {
   return ({
     categories: state.main.categories,
+    priorities: state.main.priorities,
     ideas: state.main.ideas,
     uid: state.main.user.uid,
     errorMessage: state.main.user.errorMessage,

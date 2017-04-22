@@ -81,6 +81,11 @@ class reducerClass {
         return new_state;
     }
 
+    static UPDATE_NEW_IDEA_PRIORITY(new_state, action) {
+        new_state.newIdea.priorityId = action.value;
+        return new_state;
+    }
+
     static UPDATE_EDIT_IDEA_TITLE(new_state, action) {
         new_state.editIdea.title = action.value;
         return new_state;
@@ -96,6 +101,11 @@ class reducerClass {
         return new_state;
     }
 
+    static UPDATE_EDIT_IDEA_PRIORITY(new_state, action) {
+        new_state.editIdea.priorityId = action.value;
+        return new_state;
+    }
+
     static SET_EDIT_IDEA_INDEX(new_state, action) {
         new_state.editIdea.index = action.index;
         return new_state;
@@ -107,11 +117,17 @@ class reducerClass {
     }
 
     static ADD_NEW_IDEA(new_state) {
-        new_state.ideas.unshift(new_state.newIdea);
+        if (new_state.ideas) {
+            new_state.ideas.unshift(new_state.newIdea);
+        }
+        else {
+            new_state.ideas = [new_state.newIdea];
+        }
         new_state.newIdea = {
             title: null,
             description: null,
-            categoryId: null
+            categoryId: null,
+            priorityId: null
         }
         return new_state;
     }
@@ -156,6 +172,7 @@ class reducerClass {
                 new_state.ideas[i].title = new_state.editIdea.title;
                 new_state.ideas[i].description = new_state.editIdea.description;
                 new_state.ideas[i].categoryId = new_state.editIdea.categoryId;
+                new_state.ideas[i].priorityId = new_state.editIdea.priorityId;
                 break;
             }
         }

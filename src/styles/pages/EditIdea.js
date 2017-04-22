@@ -10,6 +10,10 @@ const styles = {
         position: 'relative',
         paddingTop: 92
     },
+    inputArea: {
+        display: 'flex',
+        flexDirection: 'column'
+    }
 };
 
 const prefixer = new Prefixer(); const prefixedStyle = prefixer.prefix(styles); export default prefixedStyle;
