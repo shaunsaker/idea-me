@@ -97,7 +97,7 @@ export class Categories extends React.Component {
           {categories}
         </div>
         <FooterButton
-          text='SAVE AND CONTINUE' 
+          text='SAVE CATEGORIES' 
           loading={this.state.loading} 
           handleClick={this.saveUserCategories} />
       </div >
