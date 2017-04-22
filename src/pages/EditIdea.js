@@ -9,6 +9,7 @@ import styleConstants from '../styles/styleConstants';
 
 import Header from '../components/Header';
 import Input from '../components/Input';
+import TextArea from '../components/TextArea';
 import CategoryDropdownButton from '../components/CategoryDropdownButton';
 import FooterButton from '../components/FooterButton';
 
@@ -17,7 +18,8 @@ export class EditIdea extends React.Component {
         super(props);
 
         this.navigateBack = this.navigateBack.bind(this);
-        this.updateEditIdeaValue = this.updateEditIdeaValue.bind(this);
+        this.updateEditIdeaTitle = this.updateEditIdeaTitle.bind(this);
+        this.updateEditIdeaDescription = this.updateEditIdeaDescription.bind(this);
         this.navigateCategories = this.navigateCategories.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
         this.updateIdea = this.updateIdea.bind(this);
@@ -26,10 +28,12 @@ export class EditIdea extends React.Component {
     static get propTypes() {
         return {
             categories: React.PropTypes.array.isRequired,
-            initialIdeaValue: React.PropTypes.string.isRequired,
+            initialIdeaTitle: React.PropTypes.string.isRequired,
+            initialIdeaDescription: React.PropTypes.string,
             initialIdeaCategory: React.PropTypes.number.isRequired,
             editIdeaIndex: React.PropTypes.number.isRequired,  
-            editIdeaValue: React.PropTypes.string,
+            editIdeaTitle: React.PropTypes.string,
+            editIdeaDescription: React.PropTypes.string,
             editIdeaCategory: React.PropTypes.number,
         };
     }
@@ -38,9 +42,16 @@ export class EditIdea extends React.Component {
         this.props.router.goBack();
     }
 
-    updateEditIdeaValue(event) {
+    updateEditIdeaTitle(event) {
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_VALUE',
+            type: 'main.UPDATE_EDIT_IDEA_TITLE',
+            value: event.target.value,
+        });
+    }
+
+    updateEditIdeaDescription(event) {
+        this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_DESCRIPTION',
             value: event.target.value,
         });
     }
@@ -73,8 +84,13 @@ export class EditIdea extends React.Component {
         });
 
         this.props.dispatch({
-            type: 'main.UPDATE_EDIT_IDEA_VALUE',
-            value: this.props.initialIdeaValue,
+            type: 'main.UPDATE_EDIT_IDEA_TITLE',
+            value: this.props.initialIdeaTitle,
+        });
+
+        this.props.dispatch({
+            type: 'main.UPDATE_EDIT_IDEA_DESCRIPTION',
+            value: this.props.initialIdeaDescription,
         });
 
         this.props.dispatch({
@@ -89,8 +105,6 @@ export class EditIdea extends React.Component {
     }
 
     updateIdea() {
-        // TODO: First we will save this data here, display loading then do the below when apiSaveSuccess received
-
         this.props.dispatch({
             type: 'main.UPDATE_IDEA'
         });
@@ -99,6 +113,7 @@ export class EditIdea extends React.Component {
     }
 
     render() {
+        console.log(this.props.editIdeaDescription)
         return (
             <div
                 className='add-idea'
@@ -106,8 +121,12 @@ export class EditIdea extends React.Component {
                 <Header handleClick={this.navigateBack} />
                 <div style={styles.inputArea}>
                     <Input
-                        value={this.props.editIdeaValue ? this.props.editIdeaValue : this.props.initialIdeaValue}
-                        handleChange={this.updateEditIdeaValue} />
+                        value={this.props.editIdeaTitle ? this.props.editIdeaTitle : this.props.initialIdeaTitle}
+                        handleChange={this.updateEditIdeaTitle} />
+                    <TextArea
+                        value={this.props.editIdeaDescription ? this.props.editIdeaDescription : this.props.initialIdeaDescription}
+                        placeholder={this.props.editIdeaDescription ? '' : 'Enter your description here...' }
+                        handleChange={this.updateEditIdeaDescription} />   
                     <CategoryDropdownButton
                         currentCategory={this.props.editIdeaCategory !== null ? this.props.categories[this.props.editIdeaCategory] : this.props.categories[this.props.initialIdeaCategory]}
                         handleSelect={this.selectCategory}
@@ -125,10 +144,12 @@ export class EditIdea extends React.Component {
 function MapStateToProps(state) {
     return ({
         categories: state.main.categories,
-        initialIdeaValue: state.routing.locationBeforeTransitions.query.idea,
+        initialIdeaTitle: state.routing.locationBeforeTransitions.query.title,
+        initialIdeaDescription: state.routing.locationBeforeTransitions.query.description,
         initialIdeaCategory: Number(state.routing.locationBeforeTransitions.query.categoryId),
         editIdeaIndex: Number(state.routing.locationBeforeTransitions.query.id),
-        editIdeaValue: state.main.editIdea.value,
+        editIdeaTitle: state.main.editIdea.title,
+        editIdeaDescription: state.main.editIdea.description,
         editIdeaCategory: state.main.editIdea.categoryId,
     });
 }

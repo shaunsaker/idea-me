@@ -16,14 +16,16 @@ const initialState = {
         
     ],
     newIdea: {
-        value: null,
+        title: null,
+        description: null,
         categoryId: null
     },
     newCategory: {
         value: null,
     },  
     editIdea: {
-        value: null,
+        title: null,
+        description: null,
         categoryId: null,
         index: null,
     }

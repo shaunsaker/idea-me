@@ -4,5 +4,4 @@ TODOS
 
 ENHANCEMENTS
 
-Idea has title (input) and description (textarea)
 Ideas have priorities (high, medium, low)

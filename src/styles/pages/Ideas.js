@@ -22,12 +22,15 @@ const styles = {
         flex: 1,
         width: '100%',
         overflow: 'auto',
-        maxWidth: 720
+        maxWidth: 720,
+        borderBottomWidth: 4,
+        borderBottomStyle: 'solid',
+        borderColor: styleConstants.grey
     },
     ideaItem: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         position: 'relative',
         marginBottom: 8,
         padding: 16,
@@ -36,9 +39,19 @@ const styles = {
         borderRadius: 32,
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
     },
-    ideaText: {
+    textContainer: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flex: 1
+    },
+    ideaTextTitle: {
         fontSize: 18,
         flex: 1
+    },
+    ideaTextDescription: {
+        fontSize: 16,
+        color: styleConstants.grey,
+        flex: 2
     },
     ideaChip: {
         fontSize: 18,
@@ -55,6 +68,8 @@ const styles = {
     },
     labelsContainer: {
         display: 'flex',
+        flex: 1,
+        justifyContent: 'flex-end',
     },
     editIcon: {
         color: styleConstants.blue,

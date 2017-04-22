@@ -21,7 +21,7 @@ class reducerClass {
     static REDIRECT_USER_TO_SIGN_IN(new_state, action) {
         new_state.user.signInRedirect = true;
         return new_state;
-    } 
+    }
 
     static SIGN_IN_USER(new_state, action) {
         new_state.user.authenticated = true;
@@ -29,7 +29,7 @@ class reducerClass {
         new_state.user.errorMessage = null;
         new_state.user.signInRedirect = false;
         return new_state;
-    } 
+    }
 
     static API_SAVE_SUCCESS(new_state, action) {
         new_state.user.apiSaveSuccess = true;
@@ -38,8 +38,12 @@ class reducerClass {
     }
 
     static API_LOAD_SUCCESS(new_state, action) {
-        new_state.ideas = action.data.ideas;
-        new_state.categories = action.data.categories;
+
+        // In case it is a new user with no data
+        if (action.data) {
+            new_state.ideas = action.data.ideas;
+            new_state.categories = action.data.categories;
+        }
         new_state.user.apiLoadSuccess = true;
         new_state.user.errorMessage = null;
         return new_state;
@@ -49,7 +53,7 @@ class reducerClass {
         new_state.user.apiSaveSuccess = false;
         return new_state;
     }
-    
+
     static USER_ERROR(new_state, action) {
         new_state.user.errorMessage = action.message;
         return new_state;
@@ -60,8 +64,14 @@ class reducerClass {
         return new_state;
     }
 
-    static UPDATE_NEW_IDEA_VALUE(new_state, action) {
-        new_state.newIdea.value = action.value;
+    static UPDATE_NEW_IDEA_TITLE(new_state, action) {
+        new_state.newIdea.title = action.value;
+        new_state.user.errorMessage = null;
+        return new_state;
+    }
+
+    static UPDATE_NEW_IDEA_DESCRIPTION(new_state, action) {
+        new_state.newIdea.description = action.value;
         new_state.user.errorMessage = null;
         return new_state;
     }
@@ -71,8 +81,13 @@ class reducerClass {
         return new_state;
     }
 
-    static UPDATE_EDIT_IDEA_VALUE(new_state, action) {
-        new_state.editIdea.value = action.value;
+    static UPDATE_EDIT_IDEA_TITLE(new_state, action) {
+        new_state.editIdea.title = action.value;
+        return new_state;
+    }
+
+    static UPDATE_EDIT_IDEA_DESCRIPTION(new_state, action) {
+        new_state.editIdea.description = action.value;
         return new_state;
     }
 
@@ -94,16 +109,18 @@ class reducerClass {
     static ADD_NEW_IDEA(new_state) {
         new_state.ideas.unshift(new_state.newIdea);
         new_state.newIdea = {
-            value: null,
+            title: null,
+            description: null,
             categoryId: null
         }
         return new_state;
     }
 
     static DELETE_IDEA(new_state, action) {
-        new_state.ideas.splice(action.index, 1);      
+        new_state.ideas.splice(action.index, 1);
         return new_state;
     }
+
     static ADD_NEW_CATEGORY(new_state) {
         new_state.categories.push(new_state.newCategory.value);
         new_state.newCategory = {
@@ -116,8 +133,8 @@ class reducerClass {
         new_state.categories.splice(action.index, 1);
 
         // update ideas categoryIds
-            // set all matching categoryIds to null
-            // all categoryIds above index should be decreased by 1
+        // set all matching categoryIds to null
+        // all categoryIds above index should be decreased by 1
         const ideas = new_state.ideas;
         ideas.map((value, index) => {
             if (value.categoryId === action.index) {
@@ -127,7 +144,7 @@ class reducerClass {
                 value.categoryId--;
             }
         });
-        
+
 
         return new_state;
     }
@@ -136,7 +153,8 @@ class reducerClass {
 
         for (let i = 0; i < new_state.ideas.length; i++) {
             if (i === new_state.editIdea.index) {
-                new_state.ideas[i].value = new_state.editIdea.value;
+                new_state.ideas[i].title = new_state.editIdea.title;
+                new_state.ideas[i].description = new_state.editIdea.description;
                 new_state.ideas[i].categoryId = new_state.editIdea.categoryId;
                 break;
             }

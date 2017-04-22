@@ -61,6 +61,7 @@ p {
 @media (max-width: 480px) {
     .idea-item {
         display: block !important;
+        width: 100%;
 
         & .label-container {
             padding-top: 16px !important;

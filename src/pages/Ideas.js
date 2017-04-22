@@ -69,9 +69,9 @@ export class Ideas extends React.Component {
   }
 
   editIdea(idea) {
-    browserHistory.push(`/edit-idea?idea=${idea.value}&categoryId=${idea.categoryId}&id=${idea.index}`);
+    browserHistory.push(`/edit-idea?title=${idea.title}&description=${idea.description}&categoryId=${idea.categoryId}&id=${idea.index}`);
   }
-  
+
   deleteIdea(index) {
     this.props.dispatch({
       type: 'main.DELETE_IDEA',
@@ -117,9 +117,14 @@ export class Ideas extends React.Component {
 
               return (
                 <div key={'idea' + index} style={styles.ideaItem} className="idea-item">
-                  <p style={{ ...styles.ideaText, ...styleConstants.sourceSansPro }}>
-                    {value.value}
-                  </p>
+                  <div style={styles.textContainer}>
+                    <p style={{ ...styles.ideaTextTitle, ...styleConstants.sourceSansPro }}>
+                      {value.title}
+                    </p>
+                    <p style={{ ...styles.ideaTextDescription, ...styleConstants.sourceSansPro }}>
+                      {value.description}
+                    </p>
+                  </div>
                   <div style={styles.labelsContainer} className="label-container">
                     {
                       this.state.currentCategory == 'All' && value.categoryId !== null ?
@@ -127,9 +132,9 @@ export class Ideas extends React.Component {
                         :
                         <div></div>
                     }
-                    <EditIcon 
-                      style={styles.editIcon} 
-                      onClick={() => this.editIdea({...value, index})} />
+                    <EditIcon
+                      style={styles.editIcon}
+                      onClick={() => this.editIdea({ ...value, index })} />
                     <DeleteIcon
                       style={styles.deleteIcon}
                       onClick={() => this.deleteIdea(index)} />
@@ -155,11 +160,11 @@ export class Ideas extends React.Component {
           />
           <Count
             count={counter}
-            total={this.props.ideas.length} 
-            unit='ideas'/>
+            total={this.props.ideas.length}
+            unit='ideas' />
         </div>
         {ideas}
-        <FooterButton 
+        <FooterButton
           text='SAVE IDEAS'
           handleClick={this.saveUserIdeas}
           loading={this.state.loading} />
