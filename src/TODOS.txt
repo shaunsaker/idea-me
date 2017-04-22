@@ -1,6 +1,8 @@
 TODOS
 
-
+Test responsiveness on mobile and firefox
+    Including animations (error message)
+Fix bug first time login does not fetch data
 
 ENHANCEMENTS
 

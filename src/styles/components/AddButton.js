@@ -1,4 +1,5 @@
 import styleConstants from '../styleConstants';
+import Prefixer from 'inline-style-prefixer';
 
 const styles = {
     button: {
@@ -8,11 +9,13 @@ const styles = {
         borderWidth: 8,
         borderColor: styleConstants.white,
         backgroundColor: 'transparent',
-        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
     },
     icon: {
         color: styleConstants.white,
     }
 };
 
-export default styles;
+const prefixer = new Prefixer();
+const prefixedStyle = prefixer.prefix(styles);
+export default prefixedStyle;

@@ -21,13 +21,13 @@ export default class ErrorMessage extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.showErrorMessage) {
-            setTimeout(() => {
-                this.setState({
-                    showErrorMessage: false
-                });
-            }, 2000);
-        }
+        // if (this.state.showErrorMessage) {
+        //     setTimeout(() => {
+        //         this.setState({
+        //             showErrorMessage: false
+        //         });
+        //     }, 2000);
+        // }
     }
 
     render() {

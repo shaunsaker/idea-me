@@ -1,4 +1,4 @@
-import styleConstants from '../styleConstants';
+import styleConstants from '../styleConstants'; import Prefixer from 'inline-style-prefixer';
 
 const styles = {
     headerContainer: {
@@ -44,4 +44,4 @@ const styles = {
     },
 };
 
-export default styles;
+const prefixer = new Prefixer(); const prefixedStyle = prefixer.prefix(styles); export default prefixedStyle;

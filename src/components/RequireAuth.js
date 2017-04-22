@@ -21,6 +21,12 @@ export default function (WrappedComponent) {
           type: 'getUserAuth'
         });
       }
+
+      if (this.props.authenticated && !this.props.apiLoadSuccess) {
+        this.props.dispatch({
+          type: 'loadUserData'
+        });
+      }
     }
 
     componentDidUpdate() {
@@ -47,6 +53,7 @@ export default function (WrappedComponent) {
   }
 
   function mapStateToProps(state) {
+    console.log(state.main.user);
     return { 
       authenticated: state.main.user.authenticated,
       apiLoadSuccess: state.main.user.apiLoadSuccess,

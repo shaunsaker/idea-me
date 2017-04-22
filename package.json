@@ -28,6 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "firebase": "^3.6.9",
+    "inline-style-prefixer": "^3.0.2",
     "lodash.range": "^3.2.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
