@@ -6,7 +6,8 @@ const initialState = {
         signInRedirect: null,
         email: null,
         password: null,
-        apiSuccess: null
+        apiSaveSuccess: null,
+        apiLoadSuccess: null,
     },
     categories: [
       

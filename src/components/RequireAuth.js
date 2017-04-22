@@ -24,8 +24,10 @@ export default function (WrappedComponent) {
     }
 
     componentDidUpdate() {
-      if (this.props.authenticated) {
-        // Allow user to view page
+      if (this.props.authenticated && !this.props.apiLoadSuccess) {
+        this.props.dispatch({
+          type: 'loadUserData'
+        });
       }
       else if (this.props.redirectUserToSignIn) {
         browserHistory.push('/sign-in');
@@ -33,7 +35,7 @@ export default function (WrappedComponent) {
     } 
 
     render() {
-      const wrapper = this.props.authenticated ? 
+      const wrapper = this.props.authenticated && this.props.apiLoadSuccess ? 
         <WrappedComponent {...this.props} />
         :
         <div style={styles.container}>
@@ -46,7 +48,8 @@ export default function (WrappedComponent) {
 
   function mapStateToProps(state) {
     return { 
-      authenticated: state.main.user.authenticated ,
+      authenticated: state.main.user.authenticated,
+      apiLoadSuccess: state.main.user.apiLoadSuccess,
       redirectUserToSignIn: state.main.user.signInRedirect
     };
   }

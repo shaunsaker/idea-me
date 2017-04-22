@@ -32,7 +32,7 @@ class reducerClass {
     } 
 
     static API_SAVE_SUCCESS(new_state, action) {
-        new_state.user.apiSuccess = true;
+        new_state.user.apiSaveSuccess = true;
         new_state.user.errorMessage = null;
         return new_state;
     }
@@ -40,16 +40,16 @@ class reducerClass {
     static API_LOAD_SUCCESS(new_state, action) {
         new_state.ideas = action.data.ideas;
         new_state.categories = action.data.categories;
-        new_state.user.apiSuccess = true;
+        new_state.user.apiLoadSuccess = true;
         new_state.user.errorMessage = null;
         return new_state;
     }
 
-    static RESET_API_SUCCESS(new_state, action) {
-        new_state.user.apiSuccess = false;
+    static RESET_API_SAVE_SUCCESS(new_state, action) {
+        new_state.user.apiSaveSuccess = false;
         return new_state;
-    } 
-
+    }
+    
     static USER_ERROR(new_state, action) {
         new_state.user.errorMessage = action.message;
         return new_state;

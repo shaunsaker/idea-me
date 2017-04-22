@@ -35,7 +35,7 @@ export class Ideas extends React.Component {
       ideas: React.PropTypes.array.isRequired,
       uid: React.PropTypes.string.isRequired,
       errorMessage: React.PropTypes.string,
-      apiSuccess: React.PropTypes.bool,
+      apiSaveSuccess: React.PropTypes.bool,
     };
   }
 
@@ -84,7 +84,7 @@ export class Ideas extends React.Component {
     });
 
     this.props.dispatch({
-      type: 'main.RESET_API_SUCCESS'
+      type: 'main.RESET_API_SAVE_SUCCESS'
     });
 
     this.props.dispatch({
@@ -95,7 +95,7 @@ export class Ideas extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.errorMessage || this.props.apiSuccess) {
+    if (this.props.errorMessage || this.props.apiSaveSuccess) {
       if (this.state.loading) {
         this.setState({
           loading: false
@@ -163,7 +163,7 @@ function MapStateToProps(state) {
     ideas: state.main.ideas,
     uid: state.main.user.uid,
     errorMessage: state.main.user.errorMessage,
-    apiSuccess: state.main.user.apiSuccess,
+    apiSaveSuccess: state.main.user.apiSaveSuccess,
   });
 }
 

@@ -89,7 +89,7 @@ export class EditIdea extends React.Component {
     }
 
     updateIdea() {
-        // TODO: First we will save this data here, display loading then do the below when apisuccess received
+        // TODO: First we will save this data here, display loading then do the below when apiSaveSuccess received
 
         this.props.dispatch({
             type: 'main.UPDATE_IDEA'
