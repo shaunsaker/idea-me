@@ -25,7 +25,7 @@ const styles = {
         maxWidth: 720,
         borderBottomWidth: 4,
         borderBottomStyle: 'solid',
-        borderColor: styleConstants.grey
+        borderColor: styleConstants.clearWhite
     },
     ideaItem: {
         display: 'flex',
@@ -70,6 +70,7 @@ const styles = {
         display: 'flex',
         flex: 1,
         justifyContent: 'flex-end',
+        flexWrap: 'wrap'
     },
     editIcon: {
         color: styleConstants.blue,

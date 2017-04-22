@@ -127,7 +127,7 @@ export class Ideas extends React.Component {
                   </div>
                   <div style={styles.labelsContainer} className="label-container">
                     {
-                      this.state.currentCategory == 'All' && value.categoryId !== null ?
+                      this.state.currentCategory == 'All' && (value.categoryId === 0 || value.categoryId) ?
                         <p style={{ ...styles.ideaChip, ...styleConstants.sourceSansPro }}>{this.props.categories[value.categoryId]}</p>
                         :
                         <div></div>
