@@ -21,7 +21,7 @@ export class Ideas extends React.Component {
     this.selectCategory = this.selectCategory.bind(this);
     this.editIdea = this.editIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
-    this.saveIdeas = this.saveIdeas.bind(this);
+    this.saveUserIdeas = this.saveUserIdeas.bind(this);
 
     this.state = {
       currentCategory: 'All',
@@ -77,7 +77,7 @@ export class Ideas extends React.Component {
     });
   }
 
-  saveIdeas() {
+  saveUserIdeas() {
     this.setState({
       loading: true
     });
@@ -87,7 +87,7 @@ export class Ideas extends React.Component {
     });
 
     this.props.dispatch({
-      type: 'saveData',
+      type: 'saveUserIdeas',
       uid: this.props.uid,
       ideas: this.props.ideas
     });
@@ -149,7 +149,7 @@ export class Ideas extends React.Component {
         {ideas}
         <FooterButton 
           text='SAVE IDEAS'
-          handleClick={this.saveIdeas}
+          handleClick={this.saveUserIdeas}
           loading={this.state.loading} />
       </div >
     );

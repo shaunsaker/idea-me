@@ -12,7 +12,7 @@ export default class Input extends React.Component {
     static get propTypes() {
 
         return {
-            placeholder: React.PropTypes.string.isRequired,
+            placeholder: React.PropTypes.string,
             onChange: React.PropTypes.func,
             value: React.PropTypes.string,
             type: React.PropTypes.string

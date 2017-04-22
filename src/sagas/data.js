@@ -2,9 +2,29 @@ import { call, put } from 'redux-saga/effects';
 
 import ApiData from '../api/index';
 
-export function* saveData(action) {
+export function* saveUserIdeas(action) {
 
-    const saveResponse = yield call(ApiData.saveUserData, action);
+    const saveResponse = yield call(ApiData.saveUserIdeas, action);
+    console.log(saveResponse);
+
+    if (saveResponse) {
+        if (saveResponse.success) {
+            yield put({
+                type: 'main.API_SAVE_SUCCESS',
+            });
+        }
+        else {
+            yield put({
+                type: 'main.USER_ERROR',
+                message: saveResponse.message // TODO: Check this
+            });
+        }
+    } 
+}
+
+export function* saveUserCategories(action) {
+
+    const saveResponse = yield call(ApiData.saveUserCategories, action);
     console.log(saveResponse);
 
     if (saveResponse) {

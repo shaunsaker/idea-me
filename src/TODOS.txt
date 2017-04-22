@@ -1,12 +1,5 @@
-Api calls (Redirect before save (continue using app) - on save, display success/error message)
-    Save at Save
-    Save at Save and Continue
-    Load data at View Ideas
-
-Lightbulb gif loader
-Firebase User Auth
-
 ENHANCEMENTS
 
 Ideas count display
 Different colour labels
+Lightbulb gif loader
