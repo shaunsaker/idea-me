@@ -58,24 +58,24 @@ export default class ApiData {
 
 
     static loadUserData(action) {
-        // let uid = action.uid;
+        let uid = action.uid;
 
-        // // If we did not receive the uid via props, get the uid from Firebase
-        // if (!uid) {
-        //     uid = Firebase.auth().currentUser.uid;
-        // }
+        // If we did not receive the uid via props, get the uid from Firebase
+        if (!uid) {
+            uid = Firebase.auth().currentUser.uid;
+        }
 
-        // let userData;
+        let userData;
 
-        // return new Promise(resolve => { 
-        //     Firebase.database().ref(uid).on('value', snapshot => {
-        //         response.success = true;
-        //         response.message = snapshot.val();
-        //         resolve(response);
-        //     }, (error) => {
-        //         response.message = error.message;
-        //         resolve(response);
-        //     });
-        // });
+        return new Promise(resolve => { 
+            Firebase.database().ref(uid).on('value', snapshot => {
+                response.success = true;
+                response.message = snapshot.val();
+                resolve(response);
+            }, (error) => {
+                response.message = error.message;
+                resolve(response);
+            });
+        });
     }
 }

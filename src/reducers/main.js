@@ -33,6 +33,15 @@ class reducerClass {
 
     static API_SAVE_SUCCESS(new_state, action) {
         new_state.user.apiSuccess = true;
+        new_state.user.errorMessage = null;
+        return new_state;
+    }
+
+    static API_LOAD_SUCCESS(new_state, action) {
+        new_state.ideas = action.data.ideas;
+        new_state.categories = action.data.categories;
+        new_state.user.apiSuccess = true;
+        new_state.user.errorMessage = null;
         return new_state;
     }
 

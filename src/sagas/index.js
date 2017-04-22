@@ -5,7 +5,7 @@ import { getUserAuth } from './auth';
 import { signInUser } from './auth';
 import { saveUserIdeas } from './data';
 import { saveUserCategories } from './data';
-import { loadData } from './data';
+import { loadUserData } from './data';
 
 export function* sagas() {
     yield [
@@ -13,6 +13,6 @@ export function* sagas() {
         fork(takeLatest, 'signInUser', signInUser),
         fork(takeLatest, 'saveUserIdeas', saveUserIdeas),
         fork(takeLatest, 'saveUserCategories', saveUserCategories),
-        fork(takeLatest, 'loadData', loadData)
+        fork(takeLatest, 'loadUserData', loadUserData)
     ];
 }

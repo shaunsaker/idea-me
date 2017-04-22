@@ -42,7 +42,7 @@ export function* saveUserCategories(action) {
     } 
 }
 
-export function* loadData(action) {
+export function* loadUserData(action) {
 
     const loadResponse = yield call(ApiData.loadUserData, action);
     console.log(loadResponse);
@@ -50,13 +50,13 @@ export function* loadData(action) {
     if (loadResponse) {
         if (loadResponse.success) {
             yield put({
-                type: 'main.apiLoadGame',
+                type: 'main.API_LOAD_SUCCESS',
                 data: loadResponse.message
             });
         }
         else {
             yield put({
-                type: 'main.apiError',
+                type: 'main.USER_ERROR',
                 message: loadResponse.message
             });
         }

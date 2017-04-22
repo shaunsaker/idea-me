@@ -33,6 +33,7 @@ export class Ideas extends React.Component {
     return {
       categories: React.PropTypes.array.isRequired,
       ideas: React.PropTypes.array.isRequired,
+      uid: React.PropTypes.string.isRequired,
       errorMessage: React.PropTypes.string,
       apiSuccess: React.PropTypes.bool,
     };

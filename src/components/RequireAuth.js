@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
+import Spinner from './Spinner';
+
+import styles from '../styles/components/RequireAuth';
+import styleConstants from '../styles/styleConstants';
+
 export default function (WrappedComponent) {
   class Auth extends React.Component {
     static get propTypes() {
@@ -28,7 +33,14 @@ export default function (WrappedComponent) {
     } 
 
     render() {
-      return <WrappedComponent {...this.props} />
+      const wrapper = this.props.authenticated ? 
+        <WrappedComponent {...this.props} />
+        :
+        <div style={styles.container}>
+          <Spinner />
+        </div>
+
+      return wrapper;
     }
   }
 
