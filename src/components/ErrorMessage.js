@@ -60,7 +60,7 @@ export default class ErrorMessage extends React.Component {
             </Motion>
 
         return (
-            <div>
+            <div style={styles.errorMessageWrapper}>
                 { errorMessage }
             </div>
         );

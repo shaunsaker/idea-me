@@ -17,11 +17,18 @@ export class SignIn extends React.Component {
         this.updateUserEmail = this.updateUserEmail.bind(this);
         this.updateUserPassword = this.updateUserPassword.bind(this);
         this.signIn = this.signIn.bind(this);
+
+        this.state = {
+            loading: false
+        }
     }
 
     static get propTypes() {
         return {
-            errorMessage: React.PropTypes.string
+            userEmail: React.PropTypes.string,
+            userPassword: React.PropTypes.string,
+            errorMessage: React.PropTypes.string,
+            authenticated: React.PropTypes.bool
         };
     }
 
@@ -41,6 +48,10 @@ export class SignIn extends React.Component {
 
     signIn() {
         if (this.props.userEmail && (this.props.userPassword && this.props.userPassword.length >= 6)) {
+            this.setState({
+                loading: true 
+            });
+
             this.props.dispatch({
                 type: 'signInUser',
                 email: this.props.userEmail,
@@ -73,6 +84,19 @@ export class SignIn extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.errorMessage) {
+            if (this.state.loading) {
+                this.setState({
+                    loading: false
+                });
+            }
+        }
+        else if (this.props.authenticated) {
+            browserHistory.push('/');
+        }
+    }
+
     render() {
         const errorMessage = this.props.errorMessage ?
             <ErrorMessage text={this.props.errorMessage} />
@@ -100,6 +124,7 @@ export class SignIn extends React.Component {
                     </div>
                     <FooterButton
                         text='SIGN IN'
+                        loading={this.state.loading}
                         handleClick={this.signIn} />
                 </div>
                 {errorMessage}
@@ -112,7 +137,8 @@ function MapStateToProps(state) {
     return ({
         userEmail: state.main.user.email,
         userPassword: state.main.user.password,
-        errorMessage: state.main.user.errorMessage
+        errorMessage: state.main.user.errorMessage,
+        authenticated: state.main.user.authenticated
     });
 }
 

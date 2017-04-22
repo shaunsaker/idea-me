@@ -7,10 +7,10 @@ export function* getUserAuth() {
     const getUserAuthResponse = yield call(Auth.getUserAuth);
     console.log('getUserAuthResponse', getUserAuthResponse);
 
-    if (getUserAuthResponse) {
+    if (getUserAuthResponse.authenticated) {
         yield put({
             type: 'main.SIGN_IN_USER',
-            uid: getUserAuthResponse.uid
+            uid: getUserAuthResponse.message.uid
         });
     }
     else {
@@ -25,26 +25,26 @@ export function* signInUser(action) {
     const signUpUserResponse = yield call(Auth.signUpUser, action);
     console.log('signUpUserResponse', signUpUserResponse);
 
-    if (signUpUserResponse) {
+    if (signUpUserResponse.authenticated) {
         yield put({
             type: 'main.SIGN_IN_USER',
-            uid: signUpUserResponse.uid
+            uid: signUpUserResponse.message.uid
         });
     }
     else {
         const signInUserResponse = yield call(Auth.signInUser, action);
         console.log('signInUserResponse', signInUserResponse);
 
-        if (signInUserResponse) {
+        if (signInUserResponse.authenticated) {
             yield put({
                 type: 'main.SIGN_IN_USER',
-                uid: signInUserResponse.uid
+                uid: signInUserResponse.message.uid
             });
         }
         else {
             yield put({
                 type: 'main.USER_ERROR',
-                message: signInUserResponse // TODO: Check this
+                message: signInUserResponse.message.message
             });
         }
     }

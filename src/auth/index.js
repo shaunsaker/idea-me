@@ -1,14 +1,21 @@
 import Firebase from '../firebase';
 
+const response = {
+    authenticated: null,
+    message: null
+};
+
 export default class Auth {
     static getUserAuth() {
         return new Promise(resolve => {
             Firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    resolve(user);
+                    response.authenticated = true;
+                    response.message = user;
+                    resolve(response);
                 }
                 else {
-                    resolve(false);
+                    resolve(response);
                 }
             });
         });
@@ -18,10 +25,13 @@ export default class Auth {
         return new Promise(resolve => {
             Firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
                 .then((user) => { 
-                    resolve(user);
+                    response.authenticated = true;
+                    response.message = user;
+                    resolve(response);
                 })
                 .catch(error => {
-                    resolve(error);
+                    response.message = error;
+                    resolve(response);
                 });
         });
     }
@@ -30,10 +40,13 @@ export default class Auth {
         return new Promise(resolve => {
             Firebase.auth().signInWithEmailAndPassword(action.email, action.password)
                 .then((user) => { 
-                    resolve(user);
+                    response.authenticated = true;
+                    response.message = user;
+                    resolve(response);
                 })
                 .catch(error => {
-                    resolve(error);
+                    response.message = error;
+                    resolve(response);
                 });
         });
     }

@@ -11,7 +11,6 @@ export default class Input extends React.Component {
 
     static get propTypes() {
 
-        // Note: Value not listed because it could be a number or string
         return {
             placeholder: React.PropTypes.string.isRequired,
             onChange: React.PropTypes.func,

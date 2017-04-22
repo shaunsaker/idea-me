@@ -1,11 +1,13 @@
 import styleConstants from '../styleConstants';
 
 const styles = {
+    errorMessageWrapper: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
     errorMessageContainer: {
         position: 'absolute',
         bottom: 16,
-        left: '50%',
-        transform: 'translateX(-50%)',
         minWidth: 280,
         backgroundColor: styleConstants.clearBlack,
         paddingTop: 22,
