@@ -1,7 +1,8 @@
 TODOS
 
-In ideas page, not seeing all categories option anymore
+Mobile Android
+    Button focus outlines
+    Text area being squashed when input/textarea focus - On focus, hide everything else?
 
 ENHANCEMENTS
 
-Ideas have priorities (high, medium, low)
