@@ -1,5 +1,3 @@
-// TODO: On Save Idea - Save to db, add newIdea to ideas array
-
 import React from "react";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";
@@ -91,9 +89,6 @@ export class AddIdea extends React.Component {
   addNewIdea() {
 
     if (this.props.newIdeaTitle) {
-
-      // TODO: First we will save this data here, display loading then do the below when apiSaveSuccess received
-
       this.props.dispatch({
         type: 'main.ADD_NEW_IDEA'
       });

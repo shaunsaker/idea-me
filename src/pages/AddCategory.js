@@ -1,5 +1,3 @@
-// TODO: On Save Category - Save to db, add newCategory to categories array
-
 import React from "react";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";

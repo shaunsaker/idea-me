@@ -1,6 +1,7 @@
 TODOS
 
 Mobile Android
+    Colours don't look good (my laptop may need calibration)
     Button focus outlines
     Text area being squashed when input/textarea focus - On focus, hide everything else?
 

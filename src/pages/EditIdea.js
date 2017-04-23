@@ -1,5 +1,3 @@
-// TODO: On Update Idea - Save to db, update editIdea in appropriate location of ideas array
-
 import React from "react";
 import { connect } from "react-redux";
 import { browserHistory } from "react-router";

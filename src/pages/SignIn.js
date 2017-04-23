@@ -76,11 +76,11 @@ export class SignIn extends React.Component {
                 type: 'main.USER_ERROR',
                 message: 'You forgot to enter your ' + emptyInput
             });
-            // setTimeout(() => {
-            //     this.props.dispatch({
-            //         type: 'main.RESET_USER_ERROR'
-            //     });
-            // }, 2500);
+            setTimeout(() => {
+                this.props.dispatch({
+                    type: 'main.RESET_USER_ERROR'
+                });
+            }, 2500);
         }
     }
 

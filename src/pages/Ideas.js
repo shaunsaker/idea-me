@@ -1,10 +1,8 @@
 import React from "react";
 import { browserHistory } from "react-router";
 import { connect } from "react-redux";
-import { DropdownButton, MenuItem } from "react-bootstrap";
 import EditIcon from "react-icons/lib/fa/pencil";
 import DeleteIcon from "react-icons/lib/fa/close";
-import FooterButton from "../components/FooterButton";
 
 import styles from '../styles/pages/Ideas';
 import styleConstants from '../styles/styleConstants';
@@ -12,6 +10,7 @@ import styleConstants from '../styles/styleConstants';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Count from '../components/Count';
+import FooterButton from "../components/FooterButton";
 
 export class Ideas extends React.Component {
   constructor(props) {

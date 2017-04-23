@@ -1,6 +1,5 @@
 import React from "react";
 import { browserHistory } from "react-router";
-import { Button } from 'react-bootstrap';
 
 import Header from '../components/Header';
 import AddButton from '../components/AddButton';
